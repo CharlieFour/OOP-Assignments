@@ -1,5 +1,6 @@
-#ifndef Student.h
-#define Student.h
+#ifndef Student_h
+#define Student_h
+
 #include <string>
 #include "Course.h"
 
