@@ -10,23 +10,23 @@ class Student
 
     int const index=25;
     std::string studentName[index]=0;
-    std::int studentID[index]=0i;
-    std::int studentSemester[5]=0;
+    std::int studentID[index]=0;
+    std::int studentSemester[index]=0;
     std::string studentPassword[index]=0;
     
-    public:
+    public: 
 
     Student(std::string name, std::string id, std::string semester, std::string password):
     studentName(name), studentID(id), studentSemester(semester), studentPassword(password) {}
 
-    string getName();
+    string getName(int id);
     int getStudentID();
-    string getSemester();
-    string getPassword();
+    string getSemester(int id);
+    string getPassword(int id);
 
     void setName(string name);
     void setStudentID();
-    void setSemester(int semester);
+    void setSemester(int semester, int id);
     void setPassword(string password);
 
 

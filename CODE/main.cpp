@@ -37,7 +37,7 @@ void Student::setName(string name)
 
 }
 
-void Student::setStudentID();
+void Student::setStudentID()
 {
     Student new student;
 
@@ -54,20 +54,52 @@ void Student::setStudentID();
 }
 
 
- void Student::setSemester(int semester);
+ void Student::setSemester(int semester, int id)
  {
     Student new student;
+    int new ID = (1000-id);
+    student.studentSemester[ID] = semester; 
+    delete student, ID;
+ }
+ 
+ void Student::setPassword(string password)
+ {
+    Student new student;
+    int new ID = (1000-id);
+    student.studentSemester[ID] = semester; 
+    delete student, ID;
+ }
+
+
+string Student:: getName(int id)
+{
+    Student new student;
+    int new ID = (1000-id);
+    return student.studentName[ID]; 
+}
+
+int Student::getStudentID()
+{
+    Student new student;
+    int new ID = (1000-id);
+    student.studentName[ID];  
     
-    delete student;
+}
 
- }
-
- void Student::void setPassword(string password);
- {
+string Student::getSemester(int id) 
+{
     Student new student;
-    delete student;
- }
+    int new ID = (1000-id);
+    student.studentSemester[ID];  
+    
+}
 
+string Student::getPassword(int id)
+{
+    Student new student;
+    int new ID = (1000-id);
+    student.studentPassword[ID];
+}
 
 void Teacher::setName(string name)
 {
