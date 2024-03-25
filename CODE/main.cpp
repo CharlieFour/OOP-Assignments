@@ -45,9 +45,9 @@ void Student::setStudentID()
     {
         if( student.studentID[x] == 0 )
         {
-            student.studentID[x] = 1000+x ;
+            student.studentID[x] = 1000+a ; //1000+x 
             delete student;
-            x=25;
+            int a=25; //shdnt it be 1 so that 1000+1=1001 and then 1002, 1003..
             break;
         } 
     }
@@ -103,26 +103,83 @@ string Student::getPassword(int id)
 
 void Teacher::setName(string name)
 {
+    Teacher new teacher ;
+    for(int a = 0 ; a < 5 ; a++)
+    {
+        if(teacher.teacherName[a] == 0)
+        {
+            teacher.teacherName[a] = name;
+            delete teacher;
+            break;
+        }
+        else
+        {
+            cerr << "max limit reached (5)" << endl;
+        }
+    }
+
 
 }
 
 void Teacher::setID(string id)
 {
+Teacher new teacher;
 
+    for(int x = 0 ; x < 5 ; x++)
+    {
+        if( teacher.teacherID[x] == 0 )
+        {
+           teacher.teacherID[x] = 100+x ;
+            delete teacher;
+            x=1;
+            break;
+        } 
+    }
 }
 
-void Teacher:: setCourse(string course)
-{
 
+void Teacher:: setCourse(string course, int id)
+{
+   Teacher new teacher;
+    int new ID = (10000-id);
+    teacher.teacherCourse[ID];  
 }
 
 void Teacher:: setPassword(string password)
 {
-
+      Teacher new teacher;
+    int new ID = (1000-id);
+   teacher.teacherPassword[ID];
 }
 
 
+    string Teacher:: getName(int id)
+    {
+    Teacher new teacher;
+    int new ID = (100-id);
+    return teacher.teacherName[ID]; 
+    }
 
+    string Teacher:: getID()
+    {
+    Teacher new teacher;
+    int new ID = (1000-id);
+    Teacher.teacherName[ID];  
+    }
+
+    string Teacher:: getCourse(int id)
+    {
+    Teacher new teacher;
+    int new ID = (100-id);
+    teacher.teacherCourse[ID];  
+    }
+
+    string Teacher:: getPassword(int id)
+    {
+    Teacher new teacher;
+    int new ID = (100-id);
+   Teacher.teacherPassword[ID];
+    }
 
 
 
