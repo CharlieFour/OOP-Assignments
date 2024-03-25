@@ -5,7 +5,8 @@
 #include "Teacher.h"
 #include "Student.h"
 
-
+class Teacher; //forward declaration
+class Student; //forward declaration
 class Course
 {
     private:

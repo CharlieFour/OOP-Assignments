@@ -6,6 +6,10 @@
 #include "Teacher.h"
 #include "Student.h"
 
+class Course; //forward declaration
+class Student; //forward declaration
+class Teacher; //forward declaration
+
 class Admin
 {
     private:

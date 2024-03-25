@@ -3,7 +3,7 @@
 
 #include <string>
 #include "Course.h"
-
+class Course; //forward declaration
 class Student
 {
     private:

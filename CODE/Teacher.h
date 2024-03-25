@@ -3,6 +3,7 @@
 
 #include <string>
 
+class Course; //forward declaration
 class Teacher 
 {
     private:
