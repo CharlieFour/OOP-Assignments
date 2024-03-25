@@ -20,7 +20,7 @@ int main()
 
 void Student::setName(string name)
 {
-    Student new student ;
+    Student* student = new Student ;
     for(int a = 0 ; a < 25 ; a++)
     {
         if(student.studentName[a] == 0)
@@ -34,7 +34,7 @@ void Student::setName(string name)
             cerr << "max limit reached (25)" << endl;
         }
     }
-
+    delete student;
 }
 
 void Student::setStudentID()

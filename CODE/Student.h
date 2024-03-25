@@ -8,16 +8,16 @@ class Student
 {
     private:
 
-    int const index=25;
-    std::string studentName[index]=0;
-    std::int studentID[index]=0;
-    std::int studentSemester[index]=0;
-    std::string studentPassword[index]=0;
-    
+    static int const index = 25;
+    std::string studentName[index] = {0};
+    int studentID[index] = {0};
+    int studentSemester[index] = {0};
+    std::string studentPassword[index] = {0};
+
     public: 
 
-    Student(std::string name, std::string id, std::string semester, std::string password):
-    studentName(name), studentID(id), studentSemester(semester), studentPassword(password) {}
+    Student(std::string name[25], int id[25], int semester[25], std::string password[25]):
+    studentName(name[25]), studentID(id[25]), studentSemester(semester[25]), studentPassword(password[25]) {}
 
     string getName(int id);
     int getStudentID();
