@@ -3,21 +3,33 @@
 
 #include <string>
 #include "Course.h"
-class Course; //forward declaration
+
 class Student
 {
     private:
 
-    std::string StudentName;
-    std::string StudentID;
-    std::string StudentEnrollment;
-    std::string StudentSemester;
-    std::string studentPassword;
+    int const index=25;
+    std::string studentName[index]=0;
+    std::int studentID[index]=0i;
+    std::int studentSemester[5]=0;
+    std::string studentPassword[index]=0;
     
     public:
 
-    Student(std::string name, std::string id, std::string enrollment, std::string semester, std::string password):
-    StudentName(name), StudentID(id), StudentEnrollment(enrollment), StudentSemester(semester), studentPassword(password) {}
+    Student(std::string name, std::string id, std::string semester, std::string password):
+    studentName(name), studentID(id), studentSemester(semester), studentPassword(password) {}
+
+    string getName();
+    int getStudentID();
+    string getSemester();
+    string getPassword();
+
+    void setName(string name);
+    void setStudentID();
+    void setSemester(int semester);
+    void setPassword(string password);
+
+
 };
 
 #endif 
