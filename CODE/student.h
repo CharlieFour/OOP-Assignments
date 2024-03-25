@@ -8,16 +8,16 @@ class Student
 {
     private:
 
-    string StudentName;
-    string StudentID;
-    string StudentEnrollment;
-    string StudentSection;
-    string StudentDegree;
-    string StudentEmail;
+    std::string StudentName;
+    std::string StudentID;
+    std::string StudentEnrollment;
+    std::string StudentSemester;
+    std::string studentPassword;
     
     public:
-    Student(string name, string id, string enrollment, string section, string degree, string email):
-    StudentName(name), StudentID(id), StudentEnrollment(enrollment), StudentSection(section), StudentDegree(degree), StudentEmail(email) {}
+
+    Student(std::string name, std::string id, std::string enrollment, std::string semester, std::string password):
+    StudentName(name), StudentID(id), StudentEnrollment(enrollment), StudentSemester(semester), studentPassword(password) {}
 };
 
 #endif 
