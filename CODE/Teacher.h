@@ -16,14 +16,14 @@ class Teacher
     Teacher(std::string name, std::string id, std::string course, std::string password):
     teacherName(name), teacherID(id), teacherCourse(course), teacherPassword(password) {}
     
-    string getName();
+    string getName(int id);
     string getID();
-    string getCourse();
-    string getPassword();
+    string getCourse(int id);
+    string getPassword(int id);
 
     void setName(string name);
     void setID(string id);
-    void setCourse(string course);
+    void setCourse(string course, int id);
     void setPassword(string password);
     
 };
