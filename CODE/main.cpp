@@ -189,35 +189,107 @@ void Teacher:: setPassword(string password)
 
 void startMenu()
 {
-     int a;
-     cout << "welcome to Bahria's start menu!";
-     cout << "what would you like to do today?" << endl;
-     cout << "1.View class schedule" << endl;
-     cout << "2.Manage teacher schedule" << endl;
-     cout << "3.Manage student schedule" << endl;
+    
+    int choice, a , x ;
+
+    cout << "Welcome to Bahria University LMS" << endl;
+    cout << "Do you want to:" << endl;
+    cout << "1.login" << endl;
+    cout << "2.Register" << endl;
+    cin >> choice;
+
+    if(choice==1)
+    {
+        login();
+    }
+    if(choice==2)
+    {
+        registerUser();
+        login();
+    }
+
+     cout << "Do you want to (1)Start or (2)Quit?" << endl;
+     cin >> x;
+
+     if(x == 1)
+     {
+        cout << "You have accessed the Start Menu" << endl;
+     }
+     if(x == 2)
+     {
+        cout << "You chose to quit. Goodbye" << endl;
+        exit(0);
+     }
+     else
+     {
+        cout << "Invalid choice." << endl;
+     }
+
+     cout << "Do you want to view as:" << endl;
+     cout << "1.Student" << endl;
+     cout << "2.Teacher" << endl;
+     cout << "3.Admin" << endl;
      cout << "Enter your choice: ";
      cin >> a;
 
      switch(a)
      {
          case 1:
-             cout << "class schedule:" << endl;
+             cout << "You're viewing as a student. Would you like to:" << endl;
+             cout << "1.Register a new student (25 max)" << endl;
+             cout << "2.View timetable" << endl;
 
              break;
          case 2:
-             cout << "teacher schedule:" << endl;
+             cout << "You're viewing as a teacher. Would you like to:" << endl;
+             cout << "1.Register a new teacher (5 max)" << endl;
+             cout << "2.View timetable" << endl;
              break;
          case 3:
-             cout << "student schedule:" << endl;
+             cout << "You're veiwing as Admin." << endl;
              break;
          default:
              cout << "invalid choice:" << endl;
              break;
      }
+
      return 0;
 }
 
-void Register()
+
+void Login()
+{
+    string name;
+    int maxStudents = 25;
+    int studentID[maxStudents]=0;
+    numStudents=0;
+    int id = 1000;
+    cout << "Welcome. Enter your name: " << cout;
+    cin >> name;
+
+    int id = 1001 + numStudents; //first student will get ID of 1001
+    studentNames[numStudents] = name;
+    studentID[numStudents] = id;
+    numStudents++;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void registerUser()
 {
     int choice;
     string name;
