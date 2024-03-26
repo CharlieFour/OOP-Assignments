@@ -5,10 +5,12 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
+#include <sstream>
 
 #include "Admin.h"    
 #include "Teacher.h"
 #include "Course.h"
+#include "Student.h"
 
 using namespace std;
 
@@ -234,9 +236,54 @@ void Register()
 }
 //------------------------------------------------------------------------------
 
-Teacher Course::getTeacher(string courseName)
+Admin::Admin(string name, string password) : name(name), password(password) {}
+string Admin::getName()
 {
-    Teacher teacher;
-    teacher.teacherCourse = courseName;
-    return teacher;
+    return name;
+}
+string Admin::getPassword()
+{
+    return password;
+}
+void Admin::setName(string name)
+{
+    this -> name = name;
+}
+void Admin::addTeacher(Teacher teacher)
+{
+    
+}
+void Admin::removeTeacher(Teacher teacher)
+{  
+
+}
+
+Course::Course(string name, Teacher teacher, int credits) : courseName(name), courseTeacher(teacher), courseCredits(credits) {}
+string Course::getName()
+{
+    return courseName;
+}
+string Course::getTeacher()
+{
+    return courseTeacher.getName();
+}
+int Course::getCredits()
+{
+    return courseCredits;
+}
+void Course::setTeacher(Teacher teacher)
+{
+    courseTeacher = teacher;
+}
+void Course::setCredits(int credits)
+{
+    courseCredits = credits;
+}
+void Course::addStudent(Student student)
+{
+    enrolledStudents.push_back(student);
+}
+void Course::removeStudent(Student student)
+{
+    // Implementation to remove student
 }

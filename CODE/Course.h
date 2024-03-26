@@ -5,22 +5,21 @@
 #include "Teacher.h"
 #include "Student.h"
 
-class Teacher; //forward declaration
-class Student; //forward declaration
-class Course
-{
-    private:
-        std::string courseName    ;
-        Teacher couurseTeacher;
-        int courseCredits;
-    public:
-        std::string getName();
-        Teacher getTeacher(std::string courseName);
-        int getCredits(std::string courseName);
-        void setTeacher(Teacher teacher);
-        void setCredits(int courseCredits);
-        void addStudent(Student student);
-        void removeStudent(Student student);
+class Course {
+private:
+    std::string courseName;
+    Teacher courseTeacher;
+    int courseCredits;
+    std::vector<Student> enrolledStudents;
+public:
+    Course(std::string name, Teacher teacher, int credits);
+    std::string getName();
+    std::string getTeacher();
+    int getCredits();
+    void setTeacher(Teacher teacher);
+    void setCredits(int credits);
+    void addStudent(Student student);
+    void removeStudent(Student student);
 };
 
-#endif
+#endif // Course_H
