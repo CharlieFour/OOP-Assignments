@@ -14,20 +14,23 @@
 
 using namespace std;
 
+int maxStudents=25; //for login function
+int maxTeachers=5;
+
 int main()
 {
 }
 
 //create file for student counter 
 
-void Student::setName(string name)
+void Student::setName(string Sname)
 {
     Student* student = new Student ;
     for(int a = 0 ; a < 25 ; a++)
     {
         if(student.studentName[a] == 0)
         {
-            student.studentName[a] = name;
+            student.studentName[a] = Sname;
             delete student;
             break;
         }
@@ -56,10 +59,10 @@ void Student::setStudentID()
 }
 
 
- void Student::setSemester(int semester, int id)
+ void Student::setSemester(int semester, int studentID)
  {
     Student new student;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
     student.studentSemester[ID] = semester; 
     delete student, ID;
  }
@@ -67,50 +70,50 @@ void Student::setStudentID()
  void Student::setPassword(string password)
  {
     Student new student;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
     student.studentSemester[ID] = semester; 
     delete student, ID;
  }
 
 
-string Student:: getName(int id)
+string Student:: getName(int studentID)
 {
     Student new student;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
     return student.studentName[ID]; 
 }
 
 int Student::getStudentID()
 {
     Student new student;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
     student.studentName[ID];  
     
 }
 
-string Student::getSemester(int id) 
+string Student::getSemester(int studentID) 
 {
     Student new student;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
     student.studentSemester[ID];  
     
 }
 
-string Student::getPassword(int id)
+string Student::getPassword(int studentID)
 {
     Student new student;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
     student.studentPassword[ID];
 }
 
-void Teacher::setName(string name)
+void Teacher::setName(string Sname)
 {
     Teacher new teacher ;
     for(int a = 0 ; a < 5 ; a++)
     {
         if(teacher.teacherName[a] == 0)
         {
-            teacher.teacherName[a] = name;
+            teacher.teacherName[a] = Sname;
             delete teacher;
             break;
         }
@@ -123,7 +126,7 @@ void Teacher::setName(string name)
 
 }
 
-void Teacher::setID(string id)
+void Teacher::setID(string studentID)
 {
 Teacher new teacher;
 
@@ -140,46 +143,46 @@ Teacher new teacher;
 }
 
 
-void Teacher:: setCourse(string course, int id)
+void Teacher:: setCourse(string course, int studentID)
 {
    Teacher new teacher;
-    int new ID = (10000-id);
+    int new ID = (10000-studentID);
     teacher.teacherCourse[ID];  
 }
 
 void Teacher:: setPassword(string password)
 {
       Teacher new teacher;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
    teacher.teacherPassword[ID];
 }
 
 
-    string Teacher:: getName(int id)
+    string Teacher:: getName(int studentID)
     {
     Teacher new teacher;
-    int new ID = (100-id);
+    int new ID = (100-studentID);
     return teacher.teacherName[ID]; 
     }
 
     string Teacher:: getID()
     {
     Teacher new teacher;
-    int new ID = (1000-id);
+    int new ID = (1000-studentID);
     Teacher.teacherName[ID];  
     }
 
-    string Teacher:: getCourse(int id)
+    string Teacher:: getCourse(int studentID)
     {
     Teacher new teacher;
-    int new ID = (100-id);
+    int new ID = (100-studentID);
     teacher.teacherCourse[ID];  
     }
 
-    string Teacher:: getPassword(int id)
+    string Teacher:: getPassword(int studentID)
     {
     Teacher new teacher;
-    int new ID = (100-id);
+    int new ID = (100-studentID);
    Teacher.teacherPassword[ID];
     } //comment
 
@@ -198,6 +201,8 @@ void startMenu()
     cout << "2.Register" << endl;
     cin >> choice;
 
+    do
+    {
     if(choice==1)
     {
         login();
@@ -220,106 +225,163 @@ void startMenu()
         cout << "You chose to quit. Goodbye" << endl;
         exit(0);
      }
-     else
-     {
-        cout << "Invalid choice." << endl;
-     }
+
+    }while(x < 1 || x < 3 );
 
      cout << "Do you want to view as:" << endl;
      cout << "1.Student" << endl;
      cout << "2.Teacher" << endl;
-     cout << "3.Admin" << endl;
+     cout << "3.Exit" << endl;
      cout << "Enter your choice: ";
      cin >> a;
 
      switch(a)
      {
-         case 1:
-             cout << "You're viewing as a student. Would you like to:" << endl;
-             cout << "1.Register a new student (25 max)" << endl;
-             cout << "2.View timetable" << endl;
+        case 1:
+            cout << "You're viewing as a STUDENT. Would you like to:" << endl;
+            cout << "1. View timetable" << endl;
+            cout << "2. View Section Timetable" << endl;
+            cout << "3. View Room Timetable" << endl;
+            cout << "4. View Course Information" << endl;
+             break;
 
-             break;
-         case 2:
-             cout << "You're viewing as a teacher. Would you like to:" << endl;
-             cout << "1.Register a new teacher (5 max)" << endl;
-             cout << "2.View timetable" << endl;
-             break;
-         case 3:
-             cout << "You're veiwing as Admin." << endl;
-             break;
-         default:
-             cout << "invalid choice:" << endl;
-             break;
+        case 2:
+            cout << "You're viewing as a TEACHER. Would you like to:" << endl;
+            cout << "2. View Section Timetable" << endl;
+            cout << "3. View Room Timetable" << endl;
+            break;
+
+        case 3:     
+            cout << "General Options:" << endl;
+            cout << "1. Query Timetable" << endl;
+         
+        case 4:
+            cout << "You have successfully exitted." << endl;
+            exit(0);
      }
 
      return 0;
 }
 
 
-void Login()
-{
-    string name;
-    int maxStudents = 25;
-    int studentID[maxStudents]=0;
-    numStudents=0;
-    int id = 1000;
-    cout << "Welcome. Enter your name: " << cout;
-    cin >> name;
-
-    int id = 1001 + numStudents; //first student will get ID of 1001
-    studentNames[numStudents] = name;
-    studentID[numStudents] = id;
-    numStudents++;
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void registerUser()
 {
-    int choice;
-    string name;
+    string Sname; 
+    int numberOfStudents=0;
+    int studentID[maxStudents]=0; //maxstudents defined at top
+    string studentName[maxStudents]=0;;
+    int studentID = 1000;
+    int o;
 
-    cout << "Student Registeration" << endl;
-    
-    const int studentNumber = 5;
+    string Tname; 
+    int numberOfTeachers=0;
+    int teacherID[maxTeachers]=0; //maxTeachers defined at top
+    string teacherName[maxTeachers]=0;;
+    int teacherID = 100;
 
-    string semester1[studentNumber]=0;
-    string semester2[studentNumber]=0;
-    string semester3[studentNumber]=0;
-    string semester4[studentNumber]=0;
-    string semester5[studentNumber]=0;
+    cout << "do you want to register as a \n 1.Student or \n 2.Teacher " << endl;
+    cin >> o;
 
-    
+    do {
+    if(o==1)
+    {
+        cout << "Welcome. Enter your name: " << cout;
+        cin >> Sname;
+        if(numberOfStudents>=maxStudents)
+        {
+            cout << "Max limit has been reached." << endl;
+        }
+        else if(maxStudents<=numberOfStudents)
+        {
+            for(int a = 0 ; a < 25 ; a++)
+            {
+            
+                if(studentName[a] == 0)
+                {
+                    studentName[a] = Sname;
+                    studentID[a] = studentID+numberOfStudents;
+                    cout << "Welcome " << studentName[a] << "Your ID is: " << studentID[a] << endl;
+                    numberOfStudents++;
+                    studentID++;
+                    break;
+                }
+            }
+        }
+    }
+    if(o == 2)
+    {
+         cout << "Welcome. Enter your name: " << cout;
+        cin >> Tname;
+        if(numberOfTeachers>=maxTeachers)
+        {
+            cout << "Max limit has been reached." << endl;
+        }
+        else if(maxTeachers<=numberOfTeachers)
+        {
+            for(int a = 0 ; a < 5 ; a++)
+            {
+            
+                if(teacherName[a] == 0)
+                {
+                    teacherName[a] = Tname;
+                    teacherID[a] = teacherID + numberOfTeachers;
+                    cout << "Welcome " << teacherName[a] << "Your ID is: " << teacherID[a] << endl;
+                    numberOfTeachers++;
+                    teacherID++;
+                    break;
+                }
+            }
+        }
+    }
+    }while(o < 1 || o > 3);
+
 }
-//------------------------------------------------------------------------------
 
-Admin::Admin(string name, string password) : name(name), password(password) {}
+
+void Login()
+{
+    int a, choice;
+    cout << "Welcome to the login page." << endl;
+    cin >> a;
+    
+     do {
+        cout << "Do you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
+        cin >> choice;
+
+        if (choice < 1 || choice > 3) 
+        {
+            cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
+        }
+    } while (choice < 1 || choice > 3);
+
+    if(a == 1)
+    {
+        string username;
+        cout << "Enter your username: " << endl;
+        cin >> username;
+
+        cout << "Enter your password: " << endl;
+
+    }
+   
+
+}
+
+//------------------------------------ :D ------------------------------------------
+
+Admin::Admin(string Sname, string password) : Sname(Sname), password(password) {}
 string Admin::getName()
 {
-    return name;
+    return Sname;
 }
 string Admin::getPassword()
 {
     return password;
 }
-void Admin::setName(string name)
+void Admin::setName(string Sname)
 {
-    this -> name = name;
+    this -> Sname = Sname;
 }
 void Admin::addTeacher(Teacher teacher)
 {
@@ -330,7 +392,7 @@ void Admin::removeTeacher(Teacher teacher)
 
 }
 
-Course::Course(string name, Teacher teacher, int credits) : courseName(name), courseTeacher(teacher), courseCredits(credits) {}
+Course::Course(string Sname, Teacher teacher, int credits) : courseName(Sname), courseTeacher(teacher), courseCredits(credits) {}
 string Course::getName()
 {
     return courseName;
