@@ -179,7 +179,7 @@ void Teacher:: setPassword(string password)
     Teacher new teacher;
     int new ID = (100-id);
    Teacher.teacherPassword[ID];
-    }
+    } //comment
 
 
 
