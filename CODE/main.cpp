@@ -232,4 +232,11 @@ void Register()
 
     
 }
+//------------------------------------------------------------------------------
 
+Teacher Course::getTeacher(string courseName)
+{
+    Teacher teacher;
+    teacher.teacherCourse = courseName;
+    return teacher;
+}

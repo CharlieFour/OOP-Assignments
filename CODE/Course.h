@@ -10,24 +10,17 @@ class Student; //forward declaration
 class Course
 {
     private:
-        std::string name;
-        Teacher teacher;
-        int credits;
-        int duration;
+        std::string courseName    ;
+        Teacher couurseTeacher;
+        int courseCredits;
     public:
-        Course(std::string name, Teacher teacher, int credits, int duration);
         std::string getName();
-        Teacher getTeacher();
-        int getCredits();
-        int getDuration();
-        void setName(std::string name);
+        Teacher getTeacher(std::string courseName);
+        int getCredits(std::string courseName);
         void setTeacher(Teacher teacher);
-        void setCredits(int credits);
-        void setDuration(int duration);
+        void setCredits(int courseCredits);
         void addStudent(Student student);
         void removeStudent(Student student);
-        void printStudents();
-        void print();
 };
 
 #endif
