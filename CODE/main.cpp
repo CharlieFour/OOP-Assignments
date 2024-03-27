@@ -36,7 +36,7 @@ int main()
     timetable.saveLabTimetable("4-01", "Lab_4-01_Timetable.txt");
     timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
 
-    void startMenu();
+    startMenu();
 
     return 0;
 }
