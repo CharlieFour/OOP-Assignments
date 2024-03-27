@@ -36,7 +36,7 @@ int main()
     timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
 
     timetable.printRoomTimetable("4-17");
-    timetable.getTeacherAtTime("Monday", "08:30");
+    timetable.getTeacherAtTime("Monday", "08:40");
 
     return 0;
 }
@@ -231,12 +231,12 @@ void Timetable::printRoomTimetable(const string& room)
 }
 string Timetable::getTeacherAtTime(const string& day, const string& time)
 {
-    cout << " \nTeacher at this time:";
+    cout << " \nTeacher at this time: ";
     for(const auto& cls : classes)
     {
         if(cls.day == day && cls.startTime <= time && time < cls.endTime)
         {
-            return cls.teacherName;
+            cout << cls.teacherName;
         }
     }
     return "No teacher available at this time";
