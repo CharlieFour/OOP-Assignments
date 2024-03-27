@@ -19,7 +19,7 @@ class Student
 
     public:
         void registerStudent();
-        void saveDataToFile(const std::string& filename);
+        void saveDataToFile();
 };
 
 

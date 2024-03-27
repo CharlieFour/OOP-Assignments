@@ -25,6 +25,9 @@ class Timetable
         void addClass(const std::string& courseName, const std::string& teacherName, const std::string& room, const std::string& startTime, const std::string& endTime);
         void saveRoomTimetable(const std::string& room, const std::string& filename);
         void saveLabTimetable(const std::string& lab, const std::string& filename);
+        void printTeacherTimetable(const std::string& teacherName);
+        void printRoomTimetable(const std::string& room);
+        std::string getTeacherAtTime(const std::string& time);
 };
 
 #endif
