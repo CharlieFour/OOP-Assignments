@@ -2,7 +2,6 @@
 #define Admin_H
 
 #include <string>
-#include "Teacher.h"
 
 class Admin
 {

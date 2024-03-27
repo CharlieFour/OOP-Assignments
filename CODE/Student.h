@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include "Course.h"
 
 class Student 
 {
@@ -24,4 +23,3 @@ class Student
 
 
 #endif 
-

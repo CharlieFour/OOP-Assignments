@@ -24,10 +24,11 @@ int main()
 {
     Timetable timetable;
     // Example usage
-    timetable.addClass("Math", "Sahreef", "4-17", "Monday", "08:30", "09:45");
+    timetable.addClass("Math", "Sir Shareef", "4-17", "Monday", "08:30", "09:45");
     timetable.addClass("Physics", "Eng Waleed", "4-18", "Wednesday", "09:45", "11:00");
-    timetable.addClass("OPP", "Dr. Tamim", "4-19", "11:00", "Monday", "12:15");
-    timetable.addClass("OPP", "Dr. Tamim", "4-01", "11:00", "Monday", "12:15");
+    timetable.addClass("OPP", "Dr. Tamim", "4-19", "Mnnday", "11:00", "12:15");
+    timetable.addClass("OPP", "Dr. Tamim", "4-01", "Monday", "11:00", "12:15");
+    timetable.addClass("ISE", "Awais", "4-19", "Tuesday", "9:30", "10:30");
 
     timetable.saveRoomTimetable("4-17", "Room_4-17_Timetable.txt");
     timetable.saveRoomTimetable("4-18", "Room_4-18_Timetable.txt");
