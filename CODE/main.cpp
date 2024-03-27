@@ -26,6 +26,7 @@ int main()
     timetable.addClass("Math", "Sahreef", "4-17", "Monday", "08:30", "09:45");
     timetable.addClass("Physics", "Eng Waleed", "4-18", "Wednesday", "09:45", "11:00");
     timetable.addClass("OPP", "Dr. Tamim", "4-19", "11:00", "Monday", "12:15");
+    timetable.addClass("OPP", "Dr. Tamim", "4-01", "11:00", "Monday", "12:15");
 
     timetable.saveRoomTimetable("4-17", "Room_4-17_Timetable.txt");
     timetable.saveRoomTimetable("4-18", "Room_4-18_Timetable.txt");
@@ -35,6 +36,7 @@ int main()
     timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
 
     timetable.printRoomTimetable("4-17");
+    timetable.getTeacherAtTime("Monday", "08:30");
 
     return 0;
 }
@@ -179,7 +181,7 @@ void Timetable::saveRoomTimetable(const string& room, const string& filename)
     {
         if(cls.room == room)
         {
-            outFile << "Day: " << cls.day << "Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            outFile << "Day: " << cls.day << ", Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 
@@ -199,7 +201,7 @@ void Timetable::saveLabTimetable(const string& lab, const string& filename)
     {
         if(cls.room == lab)
         {
-            outFile << "Day: " << cls.day << "Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            outFile << "Day: " << cls.day << ", Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 
@@ -212,7 +214,7 @@ void Timetable::printTeacherTimetable(const string& teacherName)
     {
         if(cls.teacherName == teacherName)
         {
-            cout << "Day: " << cls.day << "Course: " << cls.courseName << ", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            cout << "Day: " << cls.day << ", Course: " << cls.courseName << ", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 }
@@ -223,12 +225,13 @@ void Timetable::printRoomTimetable(const string& room)
     {
         if(cls.room == room)
         {
-            cout << "Day: " << cls.day << "Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            cout << "Day: " << cls.day << ", Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 }
 string Timetable::getTeacherAtTime(const string& day, const string& time)
 {
+    cout << " \nTeacher at this time:";
     for(const auto& cls : classes)
     {
         if(cls.day == day && cls.startTime <= time && time < cls.endTime)
