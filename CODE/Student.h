@@ -2,35 +2,26 @@
 #define Student_h
 
 #include <string>
+#include <vector>
 #include "Course.h"
 
-class Student
+class Student 
 {
     private:
+        struct StudentInfo 
+        {
+            std::string name;
+            int semester;
+            int id;
+        };
 
-    static int const index = 25;
-    std::string studentName[index] = {0};
-    int studentID[index] = {0};
-    int studentSemester[index] = {0};
-    std::string studentPassword[index] = {0};
+        std::vector<StudentInfo> students;
 
-    public: 
-
-    Student(std::string name[25], int id[25], int semester[25], std::string password[25]):
-    studentName(name[25]), studentID(id[25]), studentSemester(semester[25]), studentPassword(password[25]) {}
-
-    string getName(int id);
-    int getStudentID();
-    string getSemester(int id);
-    string getPassword(int id);
-
-    void setName(string name);
-    void setStudentID();
-    void setSemester(int semester, int id);
-    void setPassword(string password);
-
-
+    public:
+        void registerStudent();
+        void saveDataToFile(const std::string& filename);
 };
+
 
 #endif 
 

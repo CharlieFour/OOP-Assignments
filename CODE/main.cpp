@@ -23,171 +23,88 @@ int main()
 
 //create file for student counter 
 
-void Student::setName(string Sname)
+void Student::registerStudent() 
 {
-    Student* student = new Student ;
-    for(int a = 0 ; a < 25 ; a++)
-    {
-        if(student.studentName[a] == 0)
-        {
-            student.studentName[a] = Sname;
-            delete student;
-            break;
-        }
-        else
-        {
-            cerr << "max limit reached (25)" << endl;
-        }
-    }
-    delete student;
-}
-
-void Student::setStudentID()
-{
-    Student new student;
-
-    for(int x = 0 ; x < 25 ; x++)
-    {
-        if( student.studentID[x] == 0 )
-        {
-            student.studentID[x] = 1000+a ; //1000+x 
-            delete student;
-            int a=25; //shdnt it be 1 so that 1000+1=1001 and then 1002, 1003..
-            break;
-        } 
-    }
-}
-
-
- void Student::setSemester(int semester, int studentID)
- {
-    Student new student;
-    int new ID = (1000-studentID);
-    student.studentSemester[ID] = semester; 
-    delete student, ID;
- }
- 
- void Student::setPassword(string password)
- {
-    Student new student;
-    int new ID = (1000-studentID);
-    student.studentSemester[ID] = semester; 
-    delete student, ID;
- }
-
-
-string Student:: getName(int studentID)
-{
-    Student new student;
-    int new ID = (1000-studentID);
-    return student.studentName[ID]; 
-}
-
-int Student::getStudentID()
-{
-    Student new student;
-    int new ID = (1000-studentID);
-    student.studentName[ID];  
+    StudentInfo newStudent;
     
-}
+    cout << "Enter student's name: ";
+    getline(cin, newStudent.name);
 
-string Student::getSemester(int studentID) 
-{
-    Student new student;
-    int new ID = (1000-studentID);
-    student.studentSemester[ID];  
-    
-}
+    cout << "Enter student's semester: ";
+    cin >> newStudent.semester;
 
-string Student::getPassword(int studentID)
-{
-    Student new student;
-    int new ID = (1000-studentID);
-    student.studentPassword[ID];
-}
-
-void Teacher::setName(string Sname)
-{
-    Teacher new teacher ;
-    for(int a = 0 ; a < 5 ; a++)
+   
+    srand(time(nullptr)); 
+    bool uniqueIDFound = false;
+    while (!uniqueIDFound) 
     {
-        if(teacher.teacherName[a] == 0)
+        newStudent.id = rand() % 9000 + 1000; 
+        bool duplicate = false;
+        for (const auto& student : students) 
         {
-            teacher.teacherName[a] = Sname;
-            delete teacher;
-            break;
+            if (student.id == newStudent.id) 
+            {
+                duplicate = true;
+                break;
+            }
         }
-        else
+        if (!duplicate) 
         {
-            cerr << "max limit reached (5)" << endl;
+            uniqueIDFound = true;
         }
     }
 
-
+    students.push_back(newStudent);
 }
 
-void Teacher::setID(string studentID)
+void Student::saveDataToFile(const string& filename) 
 {
-Teacher new teacher;
-
-    for(int x = 0 ; x < 5 ; x++)
+    ofstream outFile(filename);
+    if (!outFile) 
     {
-        if( teacher.teacherID[x] == 0 )
-        {
-           teacher.teacherID[x] = 100+x ;
-            delete teacher;
-            x=1;
-            break;
-        } 
+        cerr << "Error: Unable to open file: " << filename << endl;
+        return;
     }
+
+    outFile << "Student ID" << setw(15) << "Name" << setw(20) << "Semester" << endl;
+    for (const auto& student : students) 
+    {
+        outFile << student.id << setw(20) << student.name << setw(15) << student.semester << endl;
+    }
+
+    outFile.close();
+
 }
 
 
-void Teacher:: setCourse(string course, int studentID)
-{
-   Teacher new teacher;
-    int new ID = (10000-studentID);
-    teacher.teacherCourse[ID];  
+// Teacher methods
+Teacher::Teacher(string name, string id, string course) :
+    teacherName(name), teacherID(id), teacherCourse(course) {}
+
+string Teacher::getName() 
+{ 
+     return teacherName; 
 }
-
-void Teacher:: setPassword(string password)
-{
-      Teacher new teacher;
-    int new ID = (1000-studentID);
-   teacher.teacherPassword[ID];
+string Teacher::getID() 
+{ 
+    return teacherID; 
 }
-
-
-    string Teacher:: getName(int studentID)
-    {
-    Teacher new teacher;
-    int new ID = (100-studentID);
-    return teacher.teacherName[ID]; 
-    }
-
-    string Teacher:: getID()
-    {
-    Teacher new teacher;
-    int new ID = (1000-studentID);
-    Teacher.teacherName[ID];  
-    }
-
-    string Teacher:: getCourse(int studentID)
-    {
-    Teacher new teacher;
-    int new ID = (100-studentID);
-    teacher.teacherCourse[ID];  
-    }
-
-    string Teacher:: getPassword(int studentID)
-    {
-    Teacher new teacher;
-    int new ID = (100-studentID);
-   Teacher.teacherPassword[ID];
-    } //comment
-
-
-
+string Teacher::getCourse() 
+{ 
+    return teacherCourse; 
+}
+void Teacher::setName(string name) 
+{ 
+    teacherName = name; 
+}
+void Teacher::setID(string id) 
+{ 
+    teacherID = id; 
+}
+void Teacher::setCourse(string course) 
+{ 
+    teacherCourse = course; 
+}
 
 
 void startMenu()
