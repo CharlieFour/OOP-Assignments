@@ -13,6 +13,7 @@
 #include "Teacher.h"
 #include "Course.h"
 #include "Student.h"
+#include "TimeTable.h" 
 
 using namespace std;
 
@@ -240,7 +241,7 @@ void startMenu()
     }
     if(choice==2)
     {
-        registerStudent();
+        //registerStudent();
     }
 
      cout << "Do you want to (1)Start or (2)Quit?" << endl;
@@ -273,7 +274,7 @@ void startMenu()
             cout << "1. View timetable" << endl;
             int choice;
             cin >> choice;
-            (if choice==1)
+            if(choice==1) 
             {
                 cout << "You chose to view the timetable" << endl;
                 //student wise time table
@@ -324,18 +325,18 @@ void startMenu()
             cout << "1. View room wise time table" << endl;
             cout << "2. View teacher wise time table" << endl;
             cout << "3. Who is teaching at what time? " << endl;
-            int a;
-            cin >> a;
+            int f;
+            cin >> f;
 
-            if(a==1)
+            if(f==1)
             {
                 //room wise time table
             }
-             if(a==2)
+             if(f==2)
             {
                 //teacher wise time table
             }
-             if(a==3)
+             if(f==3)
             {
                 //who teaching when
             }
@@ -366,7 +367,7 @@ void Login()
     {
         string username;
         cout << "Enter your username: " << endl;
-        cin >> student.username;
+     
 
         cout << "Enter your password: " << endl;
     }
