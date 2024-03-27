@@ -36,8 +36,7 @@ int main()
     timetable.saveLabTimetable("4-01", "Lab_4-01_Timetable.txt");
     timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
 
-    timetable.printRoomTimetable("4-17");
-    timetable.getTeacherAtTime("Monday", "08:40");
+    void startMenu();
 
     return 0;
 }
@@ -251,8 +250,9 @@ string Timetable::getTeacherAtTime(const string& day, const string& time)
 
 void startMenu()
 {
-    
+    Timetable timetable;
     int choice, a , x ;
+    bool flag = true;
 
     cout << "Welcome to Bahria University LMS" << endl;
     cout << "Do you want to:" << endl;
@@ -264,7 +264,90 @@ void startMenu()
     {
     if(choice==1)
     {
-        //login for admin
+        do
+        {
+            cout << "Do you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
+            cout << "Enter your choice:";
+            cin >> a;
+            string room, day , time;
+            if(a == 1)
+            {
+                cout << "\n1. View timetable" << endl;
+                cout << "2. Exit" << endl;
+                cin >> x;
+                switch(x)
+                {
+                    case 1:
+                        cout << "You chose to view the timetable" << endl;
+                        cout << "Enter your room number (formate should be 4-17): ";
+                        cin >> room;
+                        timetable.printRoomTimetable(room);
+                        break;
+                    case 2:
+                        cout << "You chose to exit." << endl;
+                        exit(0);
+                        break;
+                    default:
+                        cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
+                        break;
+                }
+
+            }
+            else if(a == 2)
+            {
+                cout << "\n1. View timetable" << endl;
+                cout << "2. Exit" << endl;
+                cin >> x;
+                switch(x)
+                {
+                    case 1:
+                        cout << "You chose to view the timetable" << endl;
+                        cout << "Enter your room number (formate should be 4-17): ";
+                        cin >> room;
+                        timetable.printRoomTimetable(room);
+                        break;
+                    case 2:
+                        cout << "You chose to exit." << endl;
+                        exit(0);
+                        break;
+                    default:
+                        cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
+                        break;
+                }
+            }
+            else if(a == 3)
+            {
+                cout << "\n1. View timetable" << endl;
+                cout << "2. view timetable of a teacher" << endl;
+                cout << "3. Exit" << endl;
+                cin >> x;
+                switch(x)
+                {
+                    case 1:
+                        cout << "You chose to view the timetable" << endl;
+                        cout << "Enter your room number (formate should be 4-17): ";
+                        cin >> room;
+                        timetable.printRoomTimetable(room);
+                        break;
+                    case 2:
+                        cout << "You chose to view the timetable of a teacher" << endl;
+                        cout << "Enter the day(Monday) of the teacher: ";
+                        cin >> day;
+                        cout << "Enter the time of the teacher: ";
+                        cin >> time;
+                        timetable.getTeacherAtTime(day, time);
+                        break;
+                    case 3:
+                        cout << "You chose to exit." << endl;
+                        exit(0);
+                        break;
+                    default:
+                        cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
+                        break;
+                }
+            }
+        }while(flag == true);
+        
     }
     if(choice==2)
     {
