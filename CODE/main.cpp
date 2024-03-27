@@ -96,6 +96,35 @@ void Student::saveDataToFile()
     outFile.close();
 }
 
+ 
+ // Teacher methods
+Teacher::Teacher(string name, string id,string course) :
+teacherName(name), teacherID(id), teacherCourse(course) {}
+
+string Teacher::getName() 
+{ 
+    return teacherName; 
+}
+string Teacher::getID() 
+{ 
+    return teacherID; 
+}
+string Teacher::getCourse() 
+{ 
+    return teacherCourse; 
+}
+void Teacher::setName(std::string name) 
+{ 
+    teacherName = name; 
+}
+void Teacher::setID(std::string id) 
+{ 
+    teacherID = id; 
+}
+void Teacher::setCourse(std::string course) 
+{ 
+    teacherCourse = course; 
+}
 
 //------------------------------------ :D ------------------------------------------
 
