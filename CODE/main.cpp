@@ -13,6 +13,7 @@
 #include "Teacher.h"
 #include "Course.h"
 #include "Student.h"
+#include "Timetable.h"
 
 using namespace std;
 
@@ -141,6 +142,17 @@ void Course::setTeacher(Teacher teacher)
 void Course::setCredits(int credits)
 {
     courseCredits = credits;
+}
+//Timetable methods
+void Timetable::addClass(const std::string& courseName, const std::string& teacherName, const std::string& room, const std::string& startTime, const std::string& endTime)
+{
+    ClassInfo newClass;
+    newClass.courseName = courseName;
+    newClass.teacherName = teacherName;
+    newClass.room = room;
+    newClass.startTime = startTime;
+    newClass.endTime = endTime;
+    classes.push_back(newClass);
 }
 //-------------------------------------------------------------------------
 void startMenu()
