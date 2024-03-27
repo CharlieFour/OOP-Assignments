@@ -1,2 +1,2 @@
 Room: 4-18
-Course: Physics, Teacher: Eng Waleed, Time: 09:45 - 11:00
+Day:WednesdayCourse: Physics, Teacher: Eng Waleed, Time: 09:45 - 11:00
