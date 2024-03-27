@@ -18,8 +18,6 @@ public:
     int getCredits();
     void setTeacher(Teacher teacher);
     void setCredits(int credits);
-    void addStudent(Student student);
-    void removeStudent(Student student);
 };
 
 #endif // Course_H
