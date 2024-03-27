@@ -77,12 +77,12 @@ void Student::registerStudent()
     students.push_back(newStudent);
 }
 
-void Student::saveDataToFile(const string& filename) 
+void Student::saveDataToFile() 
 {
-    ofstream outFile(filename);
+    ofstream outFile("students.txt");
     if (!outFile) 
     {
-        cerr << "Error: Unable to open file: " << filename << endl;
+        cerr << "Error: Unable to open file: " << "students.txt" << endl;
         return;
     }
 
@@ -93,7 +93,6 @@ void Student::saveDataToFile(const string& filename)
     }
 
     outFile.close();
-
 }
 
 
