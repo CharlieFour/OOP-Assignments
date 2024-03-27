@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <limits>
 #include <sstream>
+#include <iostream>
+#include <iomanip>
 
 #include "Admin.h"    
 #include "Teacher.h"
@@ -156,12 +158,11 @@ void startMenu()
     {
     if(choice==1)
     {
-        login();
+        //login for admin
     }
     if(choice==2)
     {
-        registerUser();
-        login();
+        //stuent registration
     }
 
      cout << "Do you want to (1)Start or (2)Quit?" << endl;
@@ -210,85 +211,7 @@ void startMenu()
             cout << "You have successfully exitted." << endl;
             exit(0);
      }
-
-     return 0;
 }
-
-
-
-void registerUser()
-{
-    string Sname; 
-    int numberOfStudents=0;
-    int studentID[maxStudents]=0; //maxstudents defined at top
-    string studentName[maxStudents]=0;;
-    int studentID = 1000;
-    int o;
-
-    string Tname; 
-    int numberOfTeachers=0;
-    int teacherID[maxTeachers]=0; //maxTeachers defined at top
-    string teacherName[maxTeachers]=0;;
-    int teacherID = 100;
-
-    cout << "do you want to register as a \n 1.Student or \n 2.Teacher " << endl;
-    cin >> o;
-
-    do {
-    if(o==1)
-    {
-        cout << "Welcome. Enter your name: " << cout;
-        cin >> Sname;
-        if(numberOfStudents>=maxStudents)
-        {
-            cout << "Max limit has been reached." << endl;
-        }
-        else if(maxStudents<=numberOfStudents)
-        {
-            for(int a = 0 ; a < 25 ; a++)
-            {
-            
-                if(studentName[a] == 0)
-                {
-                    studentName[a] = Sname;
-                    studentID[a] = studentID+numberOfStudents;
-                    cout << "Welcome " << studentName[a] << "Your ID is: " << studentID[a] << endl;
-                    numberOfStudents++;
-                    studentID++;
-                    break;
-                }
-            }
-        }
-    }
-    if(o == 2)
-    {
-         cout << "Welcome. Enter your name: " << cout;
-        cin >> Tname;
-        if(numberOfTeachers>=maxTeachers)
-        {
-            cout << "Max limit has been reached." << endl;
-        }
-        else if(maxTeachers<=numberOfTeachers)
-        {
-            for(int a = 0 ; a < 5 ; a++)
-            {
-            
-                if(teacherName[a] == 0)
-                {
-                    teacherName[a] = Tname;
-                    teacherID[a] = teacherID + numberOfTeachers;
-                    cout << "Welcome " << teacherName[a] << "Your ID is: " << teacherID[a] << endl;
-                    numberOfTeachers++;
-                    teacherID++;
-                    break;
-                }
-            }
-        }
-    }
-    }while(o < 1 || o > 3);
-
-}
-
 
 void Login()
 {
@@ -318,4 +241,3 @@ void Login()
    
 
 }
-
