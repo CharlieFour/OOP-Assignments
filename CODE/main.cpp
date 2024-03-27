@@ -16,11 +16,29 @@
 
 using namespace std;
 
-int maxStudents=25; //for login function
-int maxTeachers=5;
+void startMenu();
+void login();
 
 int main()
 {
+    Timetable timetable;
+    // Example usage
+    timetable.addClass("Math", "Sahreef", "4-17", "Monday", "08:30", "09:45");
+    timetable.addClass("Physics", "Eng Waleed", "4-18", "Wednesday", "09:45", "11:00");
+    timetable.addClass("OPP", "Dr. Tamim", "4-19", "11:00", "Monday", "12:15");
+    timetable.addClass("OPP", "Dr. Tamim", "4-01", "11:00", "Monday", "12:15");
+
+    timetable.saveRoomTimetable("4-17", "Room_4-17_Timetable.txt");
+    timetable.saveRoomTimetable("4-18", "Room_4-18_Timetable.txt");
+    timetable.saveRoomTimetable("4-19", "Room_4-19_Timetable.txt");
+
+    timetable.saveLabTimetable("4-01", "Lab_4-01_Timetable.txt");
+    timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
+
+    timetable.printRoomTimetable("4-17");
+    timetable.getTeacherAtTime("Monday", "08:40");
+
+    return 0;
 }
 
 //create file for student counter 
@@ -79,33 +97,91 @@ void Student::saveDataToFile(const string& filename)
 }
 
 
-// Teacher methods
-Teacher::Teacher(string name, string id, string course) :
-    teacherName(name), teacherID(id), teacherCourse(course) {}
+//Timetable methods
+void Timetable::addClass(const string& courseName, const string& teacherName, const string& room,const string& day, const string& startTime, const string& endTime)
+{
+    ClassInfo newClass;
+    newClass.courseName = courseName;
+    newClass.teacherName = teacherName;
+    newClass.room = room;
+    newClass.day = day;
+    newClass.startTime = startTime;
+    newClass.endTime = endTime;
+    classes.push_back(newClass);
+}
+void Timetable::saveRoomTimetable(const string& room, const string& filename)
+{
+    ofstream outFile(filename);
+    if(!outFile)
+    {
+        cerr << "Error: Unable to open file: " << filename << endl;
+        return;
+    }
 
-string Teacher::getName() 
-{ 
-     return teacherName; 
+    outFile << "Room: " << room << endl;
+    for(const auto& cls : classes)
+    {
+        if(cls.room == room)
+        {
+            outFile << "Day: " << cls.day << ", Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+        }
+    }
+
+    outFile.close();
 }
-string Teacher::getID() 
-{ 
-    return teacherID; 
+void Timetable::saveLabTimetable(const string& lab, const string& filename)
+{
+    ofstream outFile(filename);
+    if(!outFile)
+    {
+        cerr << "Error: Unable to open file: " << filename << endl;
+        return;
+    }
+
+    outFile << "Lab: " << lab << endl;
+    for(const auto& cls : classes)
+    {
+        if(cls.room == lab)
+        {
+            outFile << "Day: " << cls.day << ", Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+        }
+    }
+
+    outFile.close();
 }
-string Teacher::getCourse() 
-{ 
-    return teacherCourse; 
+void Timetable::printTeacherTimetable(const string& teacherName)
+{
+    cout << "Teacher Wise Timetable for " << teacherName << ":" << endl;
+    for(const auto& cls : classes)
+    {
+        if(cls.teacherName == teacherName)
+        {
+            cout << "Day: " << cls.day << ", Course: " << cls.courseName << ", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+        }
+    }
 }
-void Teacher::setName(string name) 
-{ 
-    teacherName = name; 
+void Timetable::printRoomTimetable(const string& room)
+{
+    cout << "Room Wise Timetable for " << room << ":" << endl;
+    for(const auto& cls : classes)
+    {
+        if(cls.room == room)
+        {
+            cout << "Day: " << cls.day << ", Course: " << cls.courseName << ", Teacher: " << cls.teacherName << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+        }
+    }
 }
-void Teacher::setID(string id) 
-{ 
-    teacherID = id; 
-}
-void Teacher::setCourse(string course) 
-{ 
-    teacherCourse = course; 
+string Timetable::getTeacherAtTime(const string& day, const string& time)
+{
+    cout << " \nTeacher at this time: ";
+    for(const auto& cls : classes)
+    {
+        if(cls.day == day && cls.startTime <= time && time < cls.endTime)
+        {
+            cout << cls.teacherName;
+        }
+    }
+    return "No teacher available at this time";
 }
 
 //------------------------------------ :D ------------------------------------------
