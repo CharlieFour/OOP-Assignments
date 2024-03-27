@@ -287,26 +287,15 @@ void Login()
 
 //------------------------------------ :D ------------------------------------------
 
-Admin::Admin(string Sname, string password) : Sname(Sname), password(password) {}
+// Admin methods
+Admin::Admin(string name, string password) : name(name), password(password) {}
 string Admin::getName()
 {
-    return Sname;
+    return name;
 }
 string Admin::getPassword()
 {
     return password;
-}
-void Admin::setName(string Sname)
-{
-    this -> Sname = Sname;
-}
-void Admin::addTeacher(Teacher teacher)
-{
-    
-}
-void Admin::removeTeacher(Teacher teacher)
-{  
-
 }
 
 Course::Course(string Sname, Teacher teacher, int credits) : courseName(Sname), courseTeacher(teacher), courseCredits(credits) {}
@@ -329,12 +318,4 @@ void Course::setTeacher(Teacher teacher)
 void Course::setCredits(int credits)
 {
     courseCredits = credits;
-}
-void Course::addStudent(Student student)
-{
-    enrolledStudents.push_back(student);
-}
-void Course::removeStudent(Student student)
-{
-    // Implementation to remove student
 }
