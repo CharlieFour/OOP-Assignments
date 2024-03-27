@@ -106,7 +106,41 @@ void Teacher::setCourse(string course)
     teacherCourse = course; 
 }
 
+//------------------------------------ :D ------------------------------------------
 
+// Admin methods
+Admin::Admin(string name, string password) : name(name), password(password) {}
+string Admin::getName()
+{
+    return name;
+}
+string Admin::getPassword()
+{
+    return password;
+}
+
+Course::Course(string Sname, Teacher teacher, int credits) : courseName(Sname), courseTeacher(teacher), courseCredits(credits) {}
+string Course::getName()
+{
+    return courseName;
+}
+string Course::getTeacher()
+{
+    return courseTeacher.getName();
+}
+int Course::getCredits()
+{
+    return courseCredits;
+}
+void Course::setTeacher(Teacher teacher)
+{
+    courseTeacher = teacher;
+}
+void Course::setCredits(int credits)
+{
+    courseCredits = credits;
+}
+//-------------------------------------------------------------------------
 void startMenu()
 {
     
@@ -285,37 +319,3 @@ void Login()
 
 }
 
-//------------------------------------ :D ------------------------------------------
-
-// Admin methods
-Admin::Admin(string name, string password) : name(name), password(password) {}
-string Admin::getName()
-{
-    return name;
-}
-string Admin::getPassword()
-{
-    return password;
-}
-
-Course::Course(string Sname, Teacher teacher, int credits) : courseName(Sname), courseTeacher(teacher), courseCredits(credits) {}
-string Course::getName()
-{
-    return courseName;
-}
-string Course::getTeacher()
-{
-    return courseTeacher.getName();
-}
-int Course::getCredits()
-{
-    return courseCredits;
-}
-void Course::setTeacher(Teacher teacher)
-{
-    courseTeacher = teacher;
-}
-void Course::setCredits(int credits)
-{
-    courseCredits = credits;
-}
