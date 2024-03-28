@@ -352,109 +352,10 @@ void startMenu()
     }
     if(choice==2)
     {
-        //registerStudent();
+        Student student ;
+        student.registerStudent();
     }
-
-     cout << "Do you want to (1)Start or (2)Quit?" << endl;
-     cin >> x;
-
-     if(x == 1)
-     {
-        cout << "You have accessed the Start Menu" << endl;
-     }
-     if(x == 2)
-     {
-        cout << "You chose to quit. Goodbye" << endl;
-        exit(0);
-     }
-
     }while(x < 1 || x < 3 );
-
-     cout << "Do you want to view as:" << endl;
-     cout << "1.Student" << endl;
-     cout << "2.Teacher" << endl;
-     cout << "3.Admin" << endl;
-     cout << "4.Exit" << endl;
-     cout << "Enter your choice: ";
-     cin >> a;
-
-     switch(a)
-     {
-        case 1:
-            cout << "You're viewing as a STUDENT. Would you like to:" << endl;
-            cout << "1. View timetable" << endl;
-            int choice;
-            cin >> choice;
-            if(choice==1) 
-            {
-                cout << "You chose to view the timetable" << endl;
-                //student wise time table
-            }
-             break;
-
-        case 2:
-            cout << "You're viewing as a TEACHER. Would you like to:" << endl;
-            cout << "1. View Teacher's time table" << endl;
-            int a;
-            cin >> a;
-
-            if(a == 1)
-            {
-                cout << "Who's timetable do you want to see? \n1.Sir gwa \n2.Sir hjsd \n3.Sir jhds \n4.sjd \n5. maam gehs" << endl;
-                int x;
-                cin >> x;
-
-                if(x == 1)
-                {
-                        //tchr wise time table
-                }
-                if(x == 2)
-                {
-                        //tchr wise time table
-                }
-                if(x == 3)
-                {
-                        //tchr wise time table
-                }
-                if(x == 4)
-                {
-                        //tchr wise time table
-                }
-                if(x == 5)
-                {
-                        //tchr wise time table
-                }
-                else
-                {
-                    cout << "choose a correct option between 1 to 5."  << endl;
-                }
-            }
-            
-
-        case 3:     
-            cout << "You're viewing as ADMIN. Would you like to: " << endl;
-            cout << "1. View room wise time table" << endl;
-            cout << "2. View teacher wise time table" << endl;
-            cout << "3. Who is teaching at what time? " << endl;
-            int f;
-            cin >> f;
-
-            if(f==1)
-            {
-                //room wise time table
-            }
-             if(f==2)
-            {
-                //teacher wise time table
-            }
-             if(f==3)
-            {
-                //who teaching when
-            }
-        case 4:
-            cout << "You have successfully exitted." << endl;
-            exit(0);
-     }
 }
 
 void Login()
@@ -463,16 +364,13 @@ void Login()
     cout << "Welcome to the login page." << endl;
     cin >> a;
     
-     do {
-
+    do
+    {
         cout << "Do you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
         cin >> choice;
+        if(choice == )
 
-        if (choice < 1 || choice > 3) 
-        {
-            cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
-        }
-        } while (choice < 1 || choice > 3);
+    }while(choice < 1 || choice > 3);
 
     if(a == 1)
     {
