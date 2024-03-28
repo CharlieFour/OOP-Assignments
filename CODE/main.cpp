@@ -27,7 +27,7 @@ int main()
     timetable.addClass("Math", "Sir Shareef", "4-17", "Monday", "08:30", "09:45");
     timetable.addClass("Physics", "Eng Waleed", "4-18", "Wednesday", "09:45", "11:00");
     timetable.addClass("OPP", "Dr. Tamim", "4-19", "Mnnday", "11:00", "12:15");
-    timetable.addClass("OPP", "Dr. Tamim", "4-01", "Monday", "12:00", "12:15");
+    timetable.addClass("OPP", "Dr. Tamim", "4-01", "Monday", "11:00", "12:15");
     timetable.addClass("ISE", "Awais", "4-19", "Tuesday", "9:30", "10:30");
 
     timetable.saveRoomTimetable("4-17", "Room_4-17_Timetable.txt");
@@ -37,9 +37,7 @@ int main()
     timetable.saveLabTimetable("4-01", "Lab_4-01_Timetable.txt");
     timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
 
-    timetable.printRoomTimetable("4-17");
-    timetable.printTeacherTimetable("Eng Waleed");
-    timetable.getTeacherAtTime("Monday", "11:00");
+    timetable.printRoomTimetable("4-17");	
 
     startMenu(timetable);
 
