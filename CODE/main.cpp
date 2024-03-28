@@ -26,8 +26,8 @@ int main()
     // Example usage
     timetable.addClass("Math", "Sir Shareef", "4-17", "Monday", "08:30", "09:45");
     timetable.addClass("Physics", "Eng Waleed", "4-18", "Wednesday", "09:45", "11:00");
-    timetable.addClass("OPP", "Dr. Tamim", "4-19", "Mnnday", "11:00", "12:15");
-    timetable.addClass("OPP", "Dr. Tamim", "4-01", "Monday", "11:00", "12:15");
+    timetable.addClass("OPP", "Dr. Tamim", "4-19", "Monday", "11:00", "12:00");
+    timetable.addClass("OPP", "Dr. Tamim", "4-01", "Monday", "12:00", "01:00");
     timetable.addClass("ISE", "Awais", "4-19", "Tuesday", "9:30", "10:30");
 
     timetable.saveRoomTimetable("4-17", "Room_4-17_Timetable.txt");
@@ -37,7 +37,8 @@ int main()
     timetable.saveLabTimetable("4-01", "Lab_4-01_Timetable.txt");
     timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
 
-    timetable.printRoomTimetable("4-17");	
+    timetable.printRoomTimetable("4-17");
+    timetable.getTeacherAtTime("Monday", "12:00");
 
     startMenu(timetable);
 
@@ -250,7 +251,7 @@ void Timetable::printRoomTimetable(const string& room)
         }
     }
 }
-string Timetable::getTeacherAtTime(const string& day, const string& time)
+void Timetable::getTeacherAtTime(const string& day, const string& time)
 {
     cout << " \nTeacher at this time: ";
     for(const auto& cls : classes)
@@ -259,8 +260,11 @@ string Timetable::getTeacherAtTime(const string& day, const string& time)
         {
             cout << cls.teacherName;
         }
+        else
+        {
+            cout << "No teacher available at this time";
+        }
     }
-    return "No teacher available at this time";
 }
 //-------------------------------------------------------------------------
 
@@ -270,7 +274,7 @@ void startMenu(Timetable& timetable)
     char choice;
     do
     {
-        system("cls");
+        
         cin.ignore();
         cout << "Welcome to Bahria University LMS" << endl;
         cout << "Do you want to:" << endl;
@@ -331,10 +335,11 @@ void startMenu(Timetable& timetable)
                                 cout << "Enter your room number (formate should be 4-17): ";
                                 cin >> room;
                                 timetable.printRoomTimetable(room);
+                                flag = true;
                                 break;
                             case '2':
                                 cout << "You chose to exit." << endl;
-                                exit(0);
+                                flag = false;
                                 break;
                             default:
                                 cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
@@ -367,7 +372,7 @@ void startMenu(Timetable& timetable)
                         }    
                     }while(flag == false);
                     cin.ignore();
-                    if(flag)
+                    while(flag)
                     {
                         cout << "\n1. View timetable" << endl;
                         cout << "2. View timetable of a teacher" << endl;
@@ -381,6 +386,7 @@ void startMenu(Timetable& timetable)
                                 cout << "Enter your room number (formate should be 4-17): ";
                                 getline(cin, room);
                                 timetable.printRoomTimetable(room);
+                                flag = true;
                                 break;
                             case '2':
                                 cout << "You chose to view the timetable of a teacher" << endl;
@@ -389,10 +395,11 @@ void startMenu(Timetable& timetable)
                                 cout << "Enter the time of the teacher: ";
                                 getline(cin, time);
                                 timetable.getTeacherAtTime(day, time);
+                                flag = true;
                                 break;
                             case '3':
                                 cout << "You chose to exit." << endl;
-                                exit(0);
+                                flag = false;
                                 break;
                             default:
                                 cout << "Invalid choice. Please enter a number between 1 and 3." << endl;

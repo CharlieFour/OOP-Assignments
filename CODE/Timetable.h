@@ -28,7 +28,7 @@ class Timetable
         void saveLabTimetable(const std::string& lab, const std::string& filename);
         void printTeacherTimetable(const std::string& teacherName);
         void printRoomTimetable(const std::string& room);
-        std::string getTeacherAtTime(const std::string& day, const std::string& time);
+        void getTeacherAtTime(const std::string& day, const std::string& time);
 };
 
 #endif
