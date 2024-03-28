@@ -17,7 +17,8 @@
 
 using namespace std;
 
-void login();
+void startMenu(Timetable& timetable);
+bool login();
 
 int main()
 {
