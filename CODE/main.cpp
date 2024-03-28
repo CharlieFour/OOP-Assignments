@@ -17,7 +17,7 @@
 
 using namespace std;
 
-void startMenu();
+void startMenu(Timetable& timetable);
 bool login();
 
 int main()
@@ -37,7 +37,9 @@ int main()
     timetable.saveLabTimetable("4-01", "Lab_4-01_Timetable.txt");
     timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
 
-    startMenu();
+    timetable.printRoomTimetable("4-17");	
+
+    startMenu(timetable);
 
     return 0;
 }
@@ -257,13 +259,10 @@ string Timetable::getTeacherAtTime(const string& day, const string& time)
 }
 //-------------------------------------------------------------------------
 
-void startMenu()
+void startMenu(Timetable& timetable)
 {
-    Timetable timetable;
     bool flag = true;
     char choice;
-    
-
     do
     {
         cin.ignore();
@@ -277,7 +276,7 @@ void startMenu()
             do
             {
                 cin.ignore();
-                cout << "Do you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
+                cout << "\nDo you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
                 cout << "Enter your choice:";
                 cin >> choice;
                 string room, day , time;
@@ -328,10 +327,32 @@ void startMenu()
                             break;
                     }
                 }
-                else if(choice == 3)
+                else if(choice == '3')
                 {
+                    Admin admin("admin", "admin");
+                    bool flag = false;
+                    cout << "Welcome to the login page." << endl;
+                    string username, password;
+                    do
+                    {
+                        cin.ignore();
+                        cout << "\nEnter your username: ";
+                        getline(cin, username);
+                        cout << "\nEnter your password: ";
+                        getline(cin, password);
+                        if(username == admin.getAdminName() && password == admin.getAdminPassword())
+                        {
+                            cout << "You have successfully logged in." << endl;
+                            flag = true;
+                        }
+                        else
+                        {
+                            cout << "Invalid username or password. Please try again." << endl;
+                            flag = false;
+                        }    
+                    }while(flag == false);
                     cin.ignore();
-                    if(login())
+                    if(flag)
                     {
                         cout << "\n1. View timetable" << endl;
                         cout << "2. view timetable of a teacher" << endl;
@@ -342,15 +363,15 @@ void startMenu()
                             case '1':
                                 cout << "You chose to view the timetable" << endl;
                                 cout << "Enter your room number (formate should be 4-17): ";
-                                cin >> room;
+                                getline(cin, room);
                                 timetable.printRoomTimetable(room);
                                 break;
                             case '2':
                                 cout << "You chose to view the timetable of a teacher" << endl;
                                 cout << "Enter the day(Monday) of the teacher: ";
-                                cin >> day;
+                                getline(cin, day);
                                 cout << "Enter the time of the teacher: ";
-                                cin >> time;
+                                getline(cin, time);
                                 timetable.getTeacherAtTime(day, time);
                                 break;
                             case '3':
@@ -388,7 +409,7 @@ void startMenu()
 bool Login()
 {
     Admin admin("admin", "admin");
-    bool flag = true; 
+    bool flage = false;
     cout << "Welcome to the login page." << endl;
     string username, password;
     do
@@ -400,17 +421,13 @@ bool Login()
         if(username == admin.getAdminName() && password == admin.getAdminPassword())
         {
             cout << "You have successfully logged in." << endl;
-            flag = true;
+            return true;
         }
         else
         {
             cout << "Invalid username or password. Please try again." << endl;
-            flag = false;
+            flage = false;
         }    
-    }while(flag == false);
-    if(flag == true)
-    {
-        return true;
-    }
+    }while(flage == false);
     return false;
 }
