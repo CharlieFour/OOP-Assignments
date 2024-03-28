@@ -2,7 +2,6 @@
 #define Admin_H
 
 #include <string>
-#include "Teacher.h"
 
 class Admin
 {
@@ -11,8 +10,10 @@ class Admin
         std::string password;
     public:
         Admin(std::string name, std::string password);
-        std::string getName();
-        std::string getPassword();
+        std::string getAdminName();
+        std::string getAdminPassword();
+        void setName(std::string name);
+        void setPassword(std::string password);
 };
 
 #endif

@@ -3,7 +3,6 @@
 
 #include <string>
 #include "Teacher.h"
-#include "Student.h"
 
 class Course
 {
