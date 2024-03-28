@@ -18,7 +18,7 @@
 using namespace std;
 
 void startMenu();
-void login();
+bool login();
 
 int main()
 {
@@ -131,13 +131,21 @@ void Teacher::setCourse(std::string course)
 // Admin methods
 Admin::Admin(string name, string password) : name(name), password(password) {}
 
-string Admin::getName()
+string Admin::getAdminName()
 {
     return name;
 }
-string Admin::getPassword()
+string Admin::getAdminPassword()
 {
     return password;
+}
+void Admin::setName(string name)
+{
+    this->name = name;
+}
+void Admin::setPassword(string password)
+{
+    this->password = password;
 }
 
 Course::Course(string Sname, Teacher teacher, int credits) : courseName(Sname), courseTeacher(teacher), courseCredits(credits) {}
@@ -252,132 +260,157 @@ string Timetable::getTeacherAtTime(const string& day, const string& time)
 void startMenu()
 {
     Timetable timetable;
-    int choice, a , x ;
     bool flag = true;
-
-    cout << "Welcome to Bahria University LMS" << endl;
-    cout << "Do you want to:" << endl;
-    cout << "1.login" << endl;
-    cout << "2.Register" << endl;
-    cin >> choice;
+    char choice;
+    
 
     do
     {
-    if(choice==1)
-    {
-        do
+        cin.ignore();
+        cout << "Welcome to Bahria University LMS" << endl;
+        cout << "Do you want to:" << endl;
+        cout << "1.login" << endl;
+        cout << "2.Register" << endl;
+        cin >> choice;
+        if(choice == '1')
         {
-            cout << "Do you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
-            cout << "Enter your choice:";
-            cin >> a;
-            string room, day , time;
-            if(a == 1)
+            do
             {
-                cout << "\n1. View timetable" << endl;
-                cout << "2. Exit" << endl;
-                cin >> x;
-                switch(x)
+                cin.ignore();
+                cout << "Do you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
+                cout << "Enter your choice:";
+                cin >> choice;
+                string room, day , time;
+                if(choice == '1')
                 {
-                    case 1:
-                        cout << "You chose to view the timetable" << endl;
-                        cout << "Enter your room number (formate should be 4-17): ";
-                        cin >> room;
-                        timetable.printRoomTimetable(room);
-                        break;
-                    case 2:
-                        cout << "You chose to exit." << endl;
-                        exit(0);
-                        break;
-                    default:
-                        cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
-                        break;
-                }
+                    cin.ignore();
+                    cout << "\n1. View timetable" << endl;
+                    cout << "2. Exit" << endl;
+                    cin >> choice;
+                    switch(choice)
+                    {
+                        case '1':
+                            cout << "You chose to view the timetable" << endl;
+                            cout << "Enter your room number (formate should be 4-17): ";
+                            cin >> room;
+                            timetable.printRoomTimetable(room);
+                            break;
+                        case '2':
+                            cout << "You chose to exit." << endl;
+                            exit(0);
+                            break;
+                        default:
+                            cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
+                            break;
+                    }
 
-            }
-            else if(a == 2)
-            {
-                cout << "\n1. View timetable" << endl;
-                cout << "2. Exit" << endl;
-                cin >> x;
-                switch(x)
-                {
-                    case 1:
-                        cout << "You chose to view the timetable" << endl;
-                        cout << "Enter your room number (formate should be 4-17): ";
-                        cin >> room;
-                        timetable.printRoomTimetable(room);
-                        break;
-                    case 2:
-                        cout << "You chose to exit." << endl;
-                        exit(0);
-                        break;
-                    default:
-                        cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
-                        break;
                 }
-            }
-            else if(a == 3)
-            {
-                cout << "\n1. View timetable" << endl;
-                cout << "2. view timetable of a teacher" << endl;
-                cout << "3. Exit" << endl;
-                cin >> x;
-                switch(x)
+                else if(choice == '2')
                 {
-                    case 1:
-                        cout << "You chose to view the timetable" << endl;
-                        cout << "Enter your room number (formate should be 4-17): ";
-                        cin >> room;
-                        timetable.printRoomTimetable(room);
-                        break;
-                    case 2:
-                        cout << "You chose to view the timetable of a teacher" << endl;
-                        cout << "Enter the day(Monday) of the teacher: ";
-                        cin >> day;
-                        cout << "Enter the time of the teacher: ";
-                        cin >> time;
-                        timetable.getTeacherAtTime(day, time);
-                        break;
-                    case 3:
-                        cout << "You chose to exit." << endl;
-                        exit(0);
-                        break;
-                    default:
-                        cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
-                        break;
+                    cin.ignore();
+                    cout << "\n1. View timetable" << endl;
+                    cout << "2. Exit" << endl;
+                    cin >> choice;
+                    switch(choice)
+                    {
+                        case '1':
+                            cout << "You chose to view the timetable" << endl;
+                            cout << "Enter your room number (formate should be 4-17): ";
+                            cin >> room;
+                            timetable.printRoomTimetable(room);
+                            break;
+                        case '2':
+                            cout << "You chose to exit." << endl;
+                            exit(0);
+                            break;
+                        default:
+                            cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
+                            break;
+                    }
                 }
-            }
-        }while(flag == true);
-        
-    }
-    if(choice==2)
-    {
-        Student student ;
-        student.registerStudent();
-    }
-    }while(x < 1 || x < 3 );
+                else if(choice == 3)
+                {
+                    cin.ignore();
+                    if(login())
+                    {
+                        cout << "\n1. View timetable" << endl;
+                        cout << "2. view timetable of a teacher" << endl;
+                        cout << "3. Exit" << endl;
+                        cin >> choice;
+                        switch(choice)
+                        {
+                            case '1':
+                                cout << "You chose to view the timetable" << endl;
+                                cout << "Enter your room number (formate should be 4-17): ";
+                                cin >> room;
+                                timetable.printRoomTimetable(room);
+                                break;
+                            case '2':
+                                cout << "You chose to view the timetable of a teacher" << endl;
+                                cout << "Enter the day(Monday) of the teacher: ";
+                                cin >> day;
+                                cout << "Enter the time of the teacher: ";
+                                cin >> time;
+                                timetable.getTeacherAtTime(day, time);
+                                break;
+                            case '3':
+                                cout << "You chose to exit." << endl;
+                                exit(0);
+                                break;
+                            default:
+                                cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
+                                break;
+                        }
+                    }   
+                }
+            }while(flag == true);
+            
+        }
+        else if(choice == 2)
+        {
+            Student student ;
+            student.registerStudent();
+        }
+        cin.ignore();
+        cout << "Do you want to continue (y/n):" ;
+        cin >> choice;
+        if(choice == 'y')
+        {
+            flag = true;
+        }
+        else if(choice == 'n')
+        {
+            flag = false;
+        }
+    }while(flag);
 }
 
-void Login()
+bool Login()
 {
-    int a, choice;
+    Admin admin("admin", "admin");
+    bool flag = true; 
     cout << "Welcome to the login page." << endl;
-    cin >> a;
-    
+    string username, password;
     do
     {
-        cout << "Do you want to log in as \n1.Student \n2.Teacher \n3.Admin" << endl;
-        cin >> choice;
-        if(choice == )
-
-    }while(choice < 1 || choice > 3);
-
-    if(a == 1)
+        cout << "Enter your username: ";
+        getline(cin, username);
+        cout << "Enter your password: ";
+        getline(cin, password);
+        if(username == admin.getAdminName() && password == admin.getAdminPassword())
+        {
+            cout << "You have successfully logged in." << endl;
+            flag = true;
+        }
+        else
+        {
+            cout << "Invalid username or password. Please try again." << endl;
+            flag = false;
+        }    
+    }while(flag == false);
+    if(flag == true)
     {
-        string username;
-        cout << "Enter your username: " << endl;
-     
-
-        cout << "Enter your password: " << endl;
+        return true;
     }
+    return false;
 }
