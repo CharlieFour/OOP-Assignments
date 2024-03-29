@@ -11,8 +11,9 @@ class Course
         Teacher courseTeacher;
         int courseCredits;
     public:
-        Course(std::string name, Teacher teacher, int credits);
-        std::string getName();
+        Course() = default;
+        Course(std::string name, Teacher teacher, int credits) : courseName(name), courseTeacher(teacher), courseCredits(credits) {};
+        std::string getName() const;
         std::string getTeacher();
         int getCredits();
         void setTeacher(Teacher teacher);

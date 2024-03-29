@@ -7,23 +7,31 @@
 #include <string>
 #include <map>
 
+#include "Course.h"
+#include "Teacher.h"
+
 class Timetable
 {
     private:
         struct ClassInfo
         {
-            std::string courseName;
-            std::string teacherName;
+            Course course;
+            Teacher teacher;
             std::string room;
             std::string startTime;
             std::string endTime;
             std::string day;
+
+            ClassInfo() = default;
+
+            ClassInfo(const Course& course, const Teacher& teacher, const std::string& room, const std::string& day, const std::string& startTime, const std::string& endTime)
+            : course(course), teacher(teacher), room(room), day(day), startTime(startTime), endTime(endTime) {}
         };
 
         std::vector<ClassInfo> classes;
 
     public:
-        void addClass(const std::string& courseName, const std::string& teacherName, const std::string& room, const std::string& day, const std::string& startTime, const std::string& endTime);
+        void addClass(const Course& course, const Teacher& teacher, const std::string& room, const std::string& day, const std::string& startTime, const std::string& endTime);
         void saveRoomTimetable(const std::string& room, const std::string& filename);
         void saveLabTimetable(const std::string& lab, const std::string& filename);
         void printTeacherTimetable(const std::string& teacherName);

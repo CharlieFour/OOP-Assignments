@@ -10,8 +10,9 @@ class Teacher
         std::string teacherCourse;
     
     public:
-        Teacher(std::string name, std::string id, std::string course);
-        std::string getName();
+        Teacher() = default;
+        Teacher(std::string name, std::string id, std::string course) : teacherName(name), teacherID(id), teacherCourse(course) {};
+        std::string getName() const;
         std::string getID();
         std::string getCourse();
 
