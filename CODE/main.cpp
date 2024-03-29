@@ -24,11 +24,10 @@ int main()
 {
     Timetable timetable;
     // Example usage
-    timetable.addClass("Math", "Sir Shareef", "4-17", "Monday", "08:30", "09:45");
-    timetable.addClass("Physics", "Eng Waleed", "4-18", "Wednesday", "09:45", "11:00");
-    timetable.addClass("OPP", "Dr. Tamim", "4-19", "Monday", "11:00", "12:00");
-    timetable.addClass("OPP", "Dr. Tamim", "4-01", "Monday", "12:00", "01:00");
-    timetable.addClass("ISE", "Awais", "4-19", "Tuesday", "9:30", "10:30");
+    Course Math("Math");
+    Teacher SirShareef("Sir Shareef");
+    timetable.addClass(Math, SirShareef, "4-17", "Monday", "08:30", "09:45");
+    
 
     timetable.saveRoomTimetable("4-17", "Room_4-17_Timetable.txt");
     timetable.saveRoomTimetable("4-18", "Room_4-18_Timetable.txt");
@@ -106,8 +105,6 @@ void Student::saveDataToFile()
 
  
  // Teacher methods
-Teacher::Teacher(string name, string id,string course) :
-teacherName(name), teacherID(id), teacherCourse(course) {}
 
 string Teacher::getName() const
 { 
@@ -156,7 +153,6 @@ void Admin::setPassword(string password)
     this->password = password;
 }
 
-Course::Course(string Sname, Teacher teacher, int credits) : courseName(Sname), courseTeacher(teacher), courseCredits(credits) {}
 string Course::getName() const
 {
     return courseName;

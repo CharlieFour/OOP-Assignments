@@ -12,7 +12,8 @@ class Course
         int courseCredits;
     public:
         Course() = default;
-        Course(std::string name, Teacher teacher, int credits) : courseName(name), courseTeacher(teacher), courseCredits(credits) {};
+        Course(std::string name) : courseName(name) {}
+        Course(std::string name, Teacher teacher, int credits) : courseName(name), courseTeacher(teacher), courseCredits(credits) {}
         std::string getName() const;
         std::string getTeacher();
         int getCredits();

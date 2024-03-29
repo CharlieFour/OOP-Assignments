@@ -24,7 +24,7 @@ class Timetable
 
             ClassInfo() = default;
 
-            ClassInfo(const Course& course, const Teacher& teacher, const std::string& room, const std::string& day, const std::string& startTime, const std::string& endTime)
+            ClassInfo(const Course& course, const Teacher& teacher , const std::string& room, const std::string& day, const std::string& startTime, const std::string& endTime)
             : course(course), teacher(teacher), room(room), day(day), startTime(startTime), endTime(endTime) {}
         };
 
