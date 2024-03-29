@@ -253,17 +253,19 @@ void Timetable::printRoomTimetable(const string& room)
 }
 void Timetable::getTeacherAtTime(const string& day, const string& time)
 {
+    bool flag = false;
     cout << " \nTeacher at this time: ";
     for(const auto& cls : classes)
     {
         if(cls.day == day && cls.startTime <= time && time < cls.endTime)
         {
             cout << cls.teacherName;
+            flag = true;
         }
-        else
-        {
-            cout << "No teacher available at this time";
-        }
+    }
+    if(!flag)
+    {
+        cout << "No teacher available at this time";
     }
 }
 //-------------------------------------------------------------------------
