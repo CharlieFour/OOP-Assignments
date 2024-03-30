@@ -77,8 +77,7 @@ void Student::registerStudent()
     cout << "Student ID: " << newStudent.id << endl;
 
     students.push_back(newStudent);
-    Student newst;
-    newst.saveDataToFile();
+    saveDataToFile();
 }
 
 void Student::saveDataToFile() 
