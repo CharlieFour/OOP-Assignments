@@ -76,7 +76,6 @@ void Student::registerStudent()
     cout << "Student ID: " << newStudent.id << endl;
 
     students.push_back(newStudent);
-    saveStudentFile();
 }
 
 void Student::saveStudentFile() 
@@ -285,6 +284,7 @@ void Timetable::getTeacherAtTime(const string& day, const string& time)
 void startMenu(Timetable& timetable)
 {
     bool flag = true;
+    Student student;
     char choice;
     do
     {
@@ -427,7 +427,6 @@ void startMenu(Timetable& timetable)
         else if(choice == '2')
         {
             cin.ignore();
-            Student student ;
             student.registerStudent();
         }
         cin.ignore();
@@ -442,6 +441,8 @@ void startMenu(Timetable& timetable)
             flag = false;
         }
     }while(flag);
+    
+    student.saveStudentFile();
 }
 //saving all the files
 void saveFiles(Timetable& timetable)
