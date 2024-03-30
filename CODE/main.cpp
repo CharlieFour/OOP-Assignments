@@ -26,15 +26,16 @@ int main()
     // Example usage
     Course Math("Math");
     Teacher SirShareef("Sir Shareef");
-    timetable.addClass(Math, SirShareef, "4-17", "Monday", "08:30", "09:45");
+    
+    timetable.loadTimetable("Room_4-17_Timetable.txt");
     
 
-    timetable.saveRoomTimetable("4-17", "Room_4-17_Timetable.txt");
-    timetable.saveRoomTimetable("4-18", "Room_4-18_Timetable.txt");
-    timetable.saveRoomTimetable("4-19", "Room_4-19_Timetable.txt");
+    timetable.saveTimetable("4-17", "Room_4-17_Timetable.txt");
+    timetable.saveTimetable("4-18", "Room_4-18_Timetable.txt");
+    timetable.saveTimetable("4-19", "Room_4-19_Timetable.txt");
 
-    timetable.saveLabTimetable("4-01", "Lab_4-01_Timetable.txt");
-    timetable.saveLabTimetable("4-02", "Lab_4-02_Timetable.txt");
+    timetable.saveTimetable("4-01", "Lab_4-01_Timetable.txt");
+    timetable.saveTimetable("4-02", "Lab_4-02_Timetable.txt");
 
     timetable.printRoomTimetable("4-17");
     timetable.getTeacherAtTime("Monday", "12:00");
@@ -185,7 +186,7 @@ void Timetable::addClass(const Course& course, const Teacher& teacher, const str
     newClass.endTime = endTime;
     classes.push_back(newClass);
 }
-void Timetable::saveRoomTimetable(const string& room, const string& filename)
+void Timetable::saveTimetable(const string& room, const string& filename)
 {
     ofstream outFile(filename);
     if(!outFile)
@@ -205,25 +206,35 @@ void Timetable::saveRoomTimetable(const string& room, const string& filename)
 
     outFile.close();
 }
-void Timetable::saveLabTimetable(const string& lab, const string& filename)
+void Timetable::loadTimetable(const string& filename)
 {
-    ofstream outFile(filename);
-    if(!outFile)
+    ifstream inFile(filename);
+    if (!inFile)
     {
         cerr << "Error: Unable to open file: " << filename << endl;
         return;
     }
 
-    outFile << "Lab: " << lab << endl;
-    for(const auto& cls : classes)
+    string room;
+    string line;
+    while (getline(inFile, line))
     {
-        if(cls.room == lab)
+        if (line.find("Room: ") != string::npos)
         {
-            outFile << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            room = line.substr(6);
+        }
+        else if (line.find("Day: ") != string::npos)
+        {
+            stringstream ss(line);
+            string temp, day, courseName, teacherName, startTime, endTime;
+            ss >> temp >> day >> temp >> courseName >> temp  >> teacherName >> temp >> startTime >> temp >> endTime;
+            Course course(courseName);
+            Teacher teacher(teacherName);
+            classes.push_back({course, teacher, room, day, startTime, endTime});
         }
     }
 
-    outFile.close();
+    inFile.close();
 }
 void Timetable::printTeacherTimetable(const string& teacherName)
 {
