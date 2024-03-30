@@ -28,7 +28,6 @@ int main()
     // Example usage
     Course Math("Math");
     Teacher SirShareef("Sir Shareef");
-    
     loadFiles(timetable);
     saveFiles(timetable);
 
@@ -208,26 +207,38 @@ void Timetable::loadTimetable(const string& filename)
         cerr << "Error: Unable to open file: " << filename << endl;
         return;
     }
-
     string room;
     string line;
     while (getline(inFile, line))
     {
-        if (line.find("Room: ") != string::npos)
+        if (line.find("Room: ") != string::npos) //First line in the file i.e room number
         {
             room = line.substr(6);
         }
-        else if (line.find("Day: ") != string::npos)
+        else if (line.find("Day: ") != string::npos) //Data in the file
         {
             stringstream ss(line);
             string temp, day, courseName, teacherName, startTime, endTime;
-            ss >> temp >> day >> temp >> courseName >> temp  >> teacherName >> temp >> startTime >> temp >> endTime;
-            Course course(courseName);
-            Teacher teacher(teacherName);
-            classes.push_back({course, teacher, room, day, startTime, endTime});
+
+            //Remove prefix, so when data will save it will be in the correct format
+            //Day
+            ss >> temp >> day;
+            day = day.substr(0, day.size() - 1);
+
+            //Course
+            getline(ss, courseName, ',');
+            courseName = courseName.substr(courseName.find(":") + 2);
+
+            //Teacher
+            getline(ss, teacherName, ',');
+            teacherName = teacherName.substr(teacherName.find(":") + 2);
+
+            //Time
+            ss >> temp >> startTime >> temp >> endTime;
+
+            classes.push_back({courseName, teacherName, room, day, startTime, endTime});
         }
     }
-
     inFile.close();
 }
 void Timetable::printTeacherTimetable(const string& teacherName)

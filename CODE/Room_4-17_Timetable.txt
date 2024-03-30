@@ -1,2 +1,5 @@
 Room: 4-17
-Day: Monday,, Course: Math,, Teacher: Sir, Time: Time: - -
+Day: Monday, Course: Math, Teacher: Sir Shareef, Time: 10:00 - 11:00
+Day: Tuesday, Course: Math, Teacher: Sir Shareef, Time: 10:00 - 12:00
+Day: Wednesday, Course: Math, Teacher: Sir Shareef, Time: 08:00 - 09:00
+Day: Friday, Course: Math, Teacher: Sir Shareef, Time: 12:00 - 13:00
