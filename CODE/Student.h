@@ -18,7 +18,8 @@ class Student
 
     public:
         void registerStudent();
-        void saveDataToFile();
+        void saveStudentFile();
+        //method to load student file
 };
 
 

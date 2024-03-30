@@ -76,10 +76,10 @@ void Student::registerStudent()
     cout << "Student ID: " << newStudent.id << endl;
 
     students.push_back(newStudent);
-    saveDataToFile();
+    saveStudentFile();
 }
 
-void Student::saveDataToFile() 
+void Student::saveStudentFile() 
 {
     ofstream outFile("students.txt");
     if (!outFile) 
@@ -96,7 +96,7 @@ void Student::saveDataToFile()
 
     outFile.close();
 }
-
+// method to load student file 
  
  // Teacher methods
 
