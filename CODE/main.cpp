@@ -29,15 +29,8 @@ int main()
     Course Math("Math");
     Teacher SirShareef("Sir Shareef");
     
-    timetable.loadTimetable("Room_4-17_Timetable.txt");
-    
-
-    timetable.saveTimetable("4-17", "Room_4-17_Timetable.txt");
-    timetable.saveTimetable("4-18", "Room_4-18_Timetable.txt");
-    timetable.saveTimetable("4-19", "Room_4-19_Timetable.txt");
-
-    timetable.saveTimetable("4-01", "Lab_4-01_Timetable.txt");
-    timetable.saveTimetable("4-02", "Lab_4-02_Timetable.txt");
+    loadFiles(timetable);
+    saveFiles(timetable);
 
     timetable.printRoomTimetable("4-17");
     timetable.getTeacherAtTime("Monday", "12:00");
