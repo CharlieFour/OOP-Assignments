@@ -19,6 +19,8 @@ using namespace std;
 
 void startMenu(Timetable& timetable);
 bool login();
+void saveFiles(Timetable& timetable);
+void loadFiles(Timetable& timetable);
 
 int main()
 {
@@ -438,7 +440,28 @@ void startMenu(Timetable& timetable)
         }
     }while(flag);
 }
-
+//saving all the files
+void saveFiles(Timetable& timetable)
+{
+    //rooms
+    timetable.saveTimetable("4-17", "Room_4-17_Timetable.txt");
+    timetable.saveTimetable("4-18", "Room_4-18_Timetable.txt");
+    timetable.saveTimetable("4-19", "Room_4-19_Timetable.txt");
+    //labs
+    timetable.saveTimetable("4-01", "Lab_4-01_Timetable.txt");
+    timetable.saveTimetable("4-02", "Lab_4-02_Timetable.txt");
+}
+//loading all the files
+void loadFiles(Timetable& timetable)
+{
+    //rooms
+    timetable.loadTimetable("Room_4-17_Timetable.txt");
+    timetable.loadTimetable("Room_4-18_Timetable.txt");
+    timetable.loadTimetable("Room_4-19_Timetable.txt");
+    //labs
+    timetable.loadTimetable("Lab_4-01_Timetable.txt");
+    timetable.loadTimetable("Lab_4-02_Timetable.txt");
+}
 bool Login()
 {
     Admin admin("admin", "admin");
