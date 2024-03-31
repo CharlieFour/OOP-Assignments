@@ -12,6 +12,9 @@ class Student
             std::string name;
             std::string semester;
             int id;
+
+            StudentInfo() = default;
+            StudentInfo(std::string name, std::string semester, int id) : name(name), semester(semester), id(id) {}
         };
 
         std::vector<StudentInfo> students;

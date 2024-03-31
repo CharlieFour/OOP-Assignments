@@ -18,7 +18,7 @@
 
 using namespace std;
 
-void start(Timetable& timetable);
+void start(Timetable& timetable, Student& student);
 bool login();
 void saveFiles(Timetable& timetable, Student& student);
 void loadFiles(Timetable& timetable, Student& student);
@@ -28,7 +28,7 @@ int main()
     Timetable timetable;
     Student student;
     loadFiles(timetable, student); //loading all the files 
-    start(timetable);
+    start(timetable, student);
     saveFiles(timetable, student);//Saving all the files
     return 0;
 }
@@ -330,10 +330,9 @@ void Timetable::printDayTimetable(const string& day, const string room)
 }
 //-------------------------------------------------------------------------
 
-void start(Timetable& timetable)
+void start(Timetable& timetable, Student& student)
 {
     bool flag = true;
-    Student student;
     char choice;
     do
     {
