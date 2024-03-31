@@ -29,13 +29,13 @@ int main()
     Course Math("Math");
     Teacher SirShareef("Sir Shareef");
     loadFiles(timetable);
-
+    saveFiles(timetable);
     timetable.printRoomTimetable("4-17");
     timetable.getTeacherAtTime("Monday", "12:00");
 
     startMenu(timetable);
 
-    saveFiles(timetable);
+    
     return 0;
 }
 
@@ -195,7 +195,7 @@ void Course::setCredits(int credits)
     courseCredits = credits;
 }
 //Timetable methods
-void Timetable::addClass(const Course& course, const Teacher& teacher, const string& room,const string& day, const string& startTime, const string& endTime)
+void Timetable::addClass(const Course& course, const Teacher& teacher, const string& room,const string& day, const string& semester, const string& startTime, const string& endTime)
 {
     ClassInfo newClass;
     newClass.course = course;
@@ -204,6 +204,7 @@ void Timetable::addClass(const Course& course, const Teacher& teacher, const str
     newClass.day = day;
     newClass.startTime = startTime;
     newClass.endTime = endTime;
+    newClass.semester = semester;
     classes.push_back(newClass);
 }
 void Timetable::saveTimetable(const string& room, const string& filename)
@@ -220,7 +221,7 @@ void Timetable::saveTimetable(const string& room, const string& filename)
     {
         if(cls.room == room)
         {
-            outFile << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            outFile << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Semester: " << cls.semester << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 
@@ -245,7 +246,7 @@ void Timetable::loadTimetable(const string& filename)
         else if (line.find("Day: ") != string::npos) //Data in the file
         {
             stringstream ss(line);
-            string temp, day, courseName, teacherName, startTime, endTime;
+            string temp, day, courseName, teacherName, semester, startTime, endTime;
 
             //Remove prefix, so when data will save it will be in the correct format
             //Day
@@ -260,10 +261,14 @@ void Timetable::loadTimetable(const string& filename)
             getline(ss, teacherName, ',');
             teacherName = teacherName.substr(teacherName.find(":") + 2);
 
+            //Semester
+            ss >> temp >> semester;
+            semester = semester.substr(0, semester.size() - 1);
+
             //Time
             ss >> temp >> startTime >> temp >> endTime;
 
-            classes.push_back({courseName, teacherName, room, day, startTime, endTime});
+            classes.push_back({courseName, teacherName, room, day, semester, startTime, endTime});
         }
     }
     inFile.close();
@@ -275,7 +280,7 @@ void Timetable::printTeacherTimetable(const string& teacherName)
     {
         if(cls.teacher.getName() == teacherName)
         {
-            cout << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            cout << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Room: " << cls.room << ", Semester:" << cls.semester << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 }
@@ -286,7 +291,7 @@ void Timetable::printRoomTimetable(const string& room)
     {
         if(cls.room == room)
         {
-            cout << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            cout << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Semester: " << cls.semester << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 }

@@ -21,17 +21,18 @@ class Timetable
             std::string startTime;
             std::string endTime;
             std::string day;
+            std::string semester;
 
             ClassInfo() = default;
 
-            ClassInfo(const Course& course, const Teacher& teacher , const std::string& room, const std::string& day, const std::string& startTime, const std::string& endTime)
-            : course(course), teacher(teacher), room(room), day(day), startTime(startTime), endTime(endTime) {}
+            ClassInfo(const Course& course, const Teacher& teacher , const std::string& room, const std::string& day, const std::string& semester, const std::string& startTime, const std::string& endTime)
+            : course(course), teacher(teacher), room(room), day(day), semester(semester), startTime(startTime), endTime(endTime) {}
         };
 
         std::vector<ClassInfo> classes;
 
     public:
-        void addClass(const Course& course, const Teacher& teacher, const std::string& room, const std::string& day, const std::string& startTime, const std::string& endTime);
+        void addClass(const Course& course, const Teacher& teacher, const std::string& room, const std::string& day, const std::string& semester, const std::string& startTime, const std::string& endTime);
         void saveTimetable(const std::string& room, const std::string& filename);
         void loadTimetable(const std::string& filename);
         void printTeacherTimetable(const std::string& teacherName);
