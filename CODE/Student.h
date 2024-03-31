@@ -10,7 +10,7 @@ class Student
         struct StudentInfo 
         {
             std::string name;
-            std::string semester;
+            int semester;
             int id;
         };
 
