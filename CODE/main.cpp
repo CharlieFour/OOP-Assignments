@@ -368,6 +368,7 @@ void start(Timetable& timetable)
                         {
                             cin.ignore();
                             student.registerStudent();
+                            system("pause");
                             flag = true;
                         }
                         else if(choice == '2')
@@ -508,6 +509,7 @@ void start(Timetable& timetable)
 //saving all the files
 void saveFiles(Timetable& timetable, Student& student)
 {
+    system("cls");
     cout << "Saving all the files..." << endl;
     Sleep(1000);
     //rooms
