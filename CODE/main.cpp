@@ -20,23 +20,16 @@ using namespace std;
 
 void start(Timetable& timetable);
 bool login();
-void saveFiles(Timetable& timetable);
-void loadFiles(Timetable& timetable);
+void saveFiles(Timetable& timetable, Student& student);
+void loadFiles(Timetable& timetable, Student& student);
 
 int main()
 {
     Timetable timetable;
-    // Example usage
-    Course Math("Math");
-    Teacher SirShareef("Sir Shareef");
-    loadFiles(timetable);
-    saveFiles(timetable);
-    timetable.printRoomTimetable("4-17");
-    timetable.getTeacherAtTime("Monday", "12:00");
-
+    Student student;
+    loadFiles(timetable, student); //loading all the files 
     start(timetable);
-
-    
+    saveFiles(timetable, student);//Saving all the files
     return 0;
 }
 
@@ -313,6 +306,28 @@ void Timetable::getTeacherAtTime(const string& day, const string& time)
         cout << "No teacher available at this time";
     }
 }
+void Timetable::printStudentTimetable(const string& semester)
+{
+    cout << "Student Wise Timetable for " << semester << ":" << endl;
+    for(const auto& cls : classes)
+    {
+        if(cls.semester == semester)
+        {
+            cout << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+        }
+    }
+}
+void Timetable::printDayTimetable(const string& day, const string room)
+{
+    cout << "Day Wise Timetable for " << day << ":" << endl;
+    for(const auto& cls : classes)
+    {
+        if(cls.day == day && cls.room == room)
+        {
+            cout << "Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+        }
+    }
+}
 //-------------------------------------------------------------------------
 
 void start(Timetable& timetable)
@@ -323,8 +338,7 @@ void start(Timetable& timetable)
     do
     {
         system("cls");
-        cin.ignore();
-        cout << "Welcome to Bahria University LMS" << endl;
+        cout << "Welcome to Bahria University TimeTable Management System (TMS)" << endl;
         cout << "Do you want to:" << endl;
         cout << "1. login" << endl;
         cout << "2. Exit " << endl;
@@ -339,7 +353,7 @@ void start(Timetable& timetable)
                 cout << "Do you want to log in as: \n1.Student \n2.Teacher \n3.Admin" << endl;
                 cout << "Enter your choice:";
                 cin >> choice;
-                string room, day , time;
+                string room, day , time, semester;
                 if(choice == '1')
                 {
                     do
@@ -358,7 +372,9 @@ void start(Timetable& timetable)
                         }
                         else if(choice == '2')
                         {
-                            //----------------------------------------------
+                            cout << "Enter your semester: ";
+                            cin >> semester;
+                            timetable.printStudentTimetable(semester);
                             system("pause");
                             flag = true;
                         }
@@ -411,7 +427,7 @@ void start(Timetable& timetable)
                         if(username == admin.getAdminName() && password == admin.getAdminPassword())
                         {
                             cout << "You have successfully logged in." << endl;
-                            Sleep(250);
+                            Sleep(1000);
                             flag = true;
                         }
                         else
@@ -420,12 +436,13 @@ void start(Timetable& timetable)
                             flag = false;
                         }    
                     }while(flag == false);
-                    do
+                    while(flag)
                     {
                         system("cls");
                         cout << "1. View timetable" << endl;
                         cout << "2. View timetable of a teacher" << endl;
-                        cout << "3. Exit" << endl;
+                        cout << "3. View timetable of a day" << endl;
+                        cout << "4. Exit" << endl;
                         cin >> choice;
                         cin.ignore();
                         if(choice == '1')
@@ -433,6 +450,7 @@ void start(Timetable& timetable)
                             cout << "Enter your room number (formate should be 4-17): ";
                             getline(cin, room);
                             timetable.printRoomTimetable(room);
+                            system("pause");
                             flag = true;
                         }
                         else if(choice == '2')
@@ -442,9 +460,21 @@ void start(Timetable& timetable)
                             cout << "Enter the time of the teacher: ";
                             getline(cin, time);
                             timetable.getTeacherAtTime(day, time);
+                            cout << endl;
+                            system("pause");
                             flag = true;
                         }
                         else if(choice == '3')
+                        {
+                            cout << "Enter the day(Monday) of the day: ";
+                            getline(cin, day);
+                            cout << "Enter the room number (formate should be 4-17): ";
+                            getline(cin, room);
+                            timetable.printDayTimetable(day, room);
+                            system("pause");
+                            flag = true;
+                        }
+                        else if(choice == '4')
                         {
                             flag = false;
                         }
@@ -452,7 +482,7 @@ void start(Timetable& timetable)
                         {
                             cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
                         }
-                    }while(flag);
+                    }
                 }
             }while(flag == true);
             
@@ -474,12 +504,12 @@ void start(Timetable& timetable)
             flag = false;
         }
     }while(flag);
-    
-    student.saveStudentFile();
 }
 //saving all the files
-void saveFiles(Timetable& timetable)
+void saveFiles(Timetable& timetable, Student& student)
 {
+    cout << "Saving all the files..." << endl;
+    Sleep(1000);
     //rooms
     timetable.saveTimetable("4-17", "Room_4-17_Timetable.txt");
     timetable.saveTimetable("4-18", "Room_4-18_Timetable.txt");
@@ -487,10 +517,14 @@ void saveFiles(Timetable& timetable)
     //labs
     timetable.saveTimetable("4-01", "Lab_4-01_Timetable.txt");
     timetable.saveTimetable("4-02", "Lab_4-02_Timetable.txt");
+    //students
+    student.saveStudentFile();
 }
 //loading all the files
-void loadFiles(Timetable& timetable)
+void loadFiles(Timetable& timetable, Student& student)
 {
+    cout << "Loading all the files..." << endl;
+    Sleep(1000);
     //rooms
     timetable.loadTimetable("Room_4-17_Timetable.txt");
     timetable.loadTimetable("Room_4-18_Timetable.txt");
@@ -498,4 +532,6 @@ void loadFiles(Timetable& timetable)
     //labs
     timetable.loadTimetable("Lab_4-01_Timetable.txt");
     timetable.loadTimetable("Lab_4-02_Timetable.txt");
+    //students
+    student.loadStudentFile();
 }

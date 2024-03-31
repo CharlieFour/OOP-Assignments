@@ -1,5 +1,12 @@
 Room: 4-17
-Day: Monday, Course: Math, Teacher: Sir Shareef, Semester: 4th, Time: 10:00 - 11:00
-Day: Tuesday, Course: Math, Teacher: Sir Shareef, Semester: 2nd, Time: 10:00 - 11:00
-Day: Wednesday, Course: Math, Teacher: Sir Shareef, Semester: 4th, Time: 10:00 - 11:00
-Day: Thursday, Course: Math, Teacher: Sir Shareef, Semester: 2nd, Time: 10:00 - 11:00
+Day: Monday, Course: ISE, Teacher: Dr.Awais, Semester: 2B, Time: 08:30 - 10:25
+Day: Monday, Course: DBMS, Teacher: Dr.Joddat, Semester: 4A, Time: 10:30 - 12:25
+Day: Monday, Course: HCI, Teacher: Dr.Joddat, Semester: 6A, Time: 12:30 - 14:25
+Day: Monday, Course: TRW, Teacher: Dr.Baseer, Semester: 6A, Time: 14:30 - 15:25
+Day: Tuesday, Course: HCI, Teacher: Dr.Joddat, Semester: 6A, Time: 10:30 - 12:25
+Day: Tuesday, Course: DS, Teacher: Engr.Sadaf, Semester: 2A, Time: 12:30 - 13:25
+Day: Tuesday, Course: SDA, Teacher: Dr.Awais, Semester: 4A, Time: 13:30 - 15:25
+Day: Wednesday, Course: ECS, Teacher: Ghulam, Semester: 2A, Time: 08:30 - 10:25
+Day: Wednesday, Course: ECS, Teacher: Ghulam, Semester: 2B, Time: 10:30 - 12:25
+Day: Friday, Course: DS, Teacher: Engr.Sadaf, Semester: 2B, Time: 09:30 - 11:25
+Day: Friday, Course: DAA, Teacher: Engr.Sadaf, Semester: 4A, Time: 11:30 - 12:25

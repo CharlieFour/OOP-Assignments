@@ -38,6 +38,8 @@ class Timetable
         void printTeacherTimetable(const std::string& teacherName);
         void printRoomTimetable(const std::string& room);
         void getTeacherAtTime(const std::string& day, const std::string& time);
+        void printStudentTimetable(const std::string& semester);
+        void printDayTimetable(const std::string& day, const std::string room);
 };
 
 #endif
