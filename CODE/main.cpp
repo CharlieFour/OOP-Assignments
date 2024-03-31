@@ -95,7 +95,35 @@ void Student::saveStudentFile()
 
     outFile.close();
 }
-// method to load student file 
+
+void Student::loadStudentFile()
+{
+    ifstream inFile("students.txt");
+    if (!inFile)
+    {
+        cerr << "Error: Unable to open file: students.txt" << endl;
+        return;
+    }
+
+    //Clear the existing data in students vector
+    students.clear();
+
+    string header;
+    getline(inFile, header); //Read nd discard header line
+
+    int id, semester;
+    string name; 
+    StudentInfo student;
+    while (inFile >> id >> setw(20) >> name >> setw(15) >> semester)
+    {
+        student.id = id;
+        student.name = name;
+        student.semester = semester;
+        students.push_back(student);
+    }
+
+    inFile.close();
+}
  
  // Teacher methods
 

@@ -19,7 +19,7 @@ class Student
     public:
         void registerStudent();
         void saveStudentFile();
-        //method to load student file
+        void loadStudentFile();
 };
 
 
