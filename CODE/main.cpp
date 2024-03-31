@@ -111,8 +111,8 @@ void Student::loadStudentFile()
     string header;
     getline(inFile, header); //Read nd discard header line
 
-    int id, semester;
-    string name; 
+    int id;
+    string name, semester; 
     StudentInfo student;
     while (inFile >> id >> setw(20) >> name >> setw(15) >> semester)
     {
