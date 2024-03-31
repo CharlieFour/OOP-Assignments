@@ -29,13 +29,13 @@ int main()
     Course Math("Math");
     Teacher SirShareef("Sir Shareef");
     loadFiles(timetable);
-    saveFiles(timetable);
 
     timetable.printRoomTimetable("4-17");
     timetable.getTeacherAtTime("Monday", "12:00");
 
     startMenu(timetable);
 
+    saveFiles(timetable);
     return 0;
 }
 
