@@ -276,7 +276,7 @@ void Timetable::printTeacherTimetable(const string& teacherName)
         {
             cout << "Day: " << cls.day << ", Course: " << cls.course.getName() << ", Room: " << cls.room << ", Semester:" << cls.semester << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
-    }
+    }   
 }
 void Timetable::printRoomTimetable(const string& room)
 {
@@ -289,14 +289,14 @@ void Timetable::printRoomTimetable(const string& room)
         }
     }
 }
-void Timetable::getTeacherAtTime(const string& day, const string& time)
+void Timetable::getTeacherAtTime(const string& day, const string& time, const string& room)
 {
     bool flag = false;
-    cout << " \nTeacher at this time: ";
     for(const auto& cls : classes)
     {
-        if(cls.day == day && cls.startTime <= time && time < cls.endTime)
+        if(cls.day == day && cls.startTime <= time && time < cls.endTime && cls.room == room)
         {
+            cout << " \nTeacher at this time: ";
             cout << cls.teacher.getName();
             flag = true;
         }
@@ -400,9 +400,9 @@ void start(Timetable& timetable, Student& student)
                         cin >> choice;
                         if(choice == '1')
                         {
-                            cout << "Enter your room number (formate should be 4-17): ";
+                            cout << "Enter your name: ";
                             cin >> room;
-                            timetable.printRoomTimetable(room);
+                            timetable.printTeacherTimetable(room);
                             system("pause");
                             flag = true;
                         }
@@ -459,7 +459,9 @@ void start(Timetable& timetable, Student& student)
                             getline(cin, day);
                             cout << "Enter the time of the teacher: ";
                             getline(cin, time);
-                            timetable.getTeacherAtTime(day, time);
+                            cout << "Enter the room number (formate should be 4-17): ";
+                            getline(cin, room);
+                            timetable.getTeacherAtTime(day, time, room);
                             cout << endl;
                             system("pause");
                             flag = true;
