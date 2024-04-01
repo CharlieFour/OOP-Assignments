@@ -1,3 +1,3 @@
 Student ID           Name            Semester
-3182         Abdul Rafay             2B
-3316           Erha Riaz             2B
+3182               Abdul          Rafay
+2                   B           3316

@@ -324,7 +324,7 @@ void Timetable::printDayTimetable(const string& day, const string room)
     {
         if(cls.day == day && cls.room == room)
         {
-            cout << "Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << ", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
+            cout << "Course: " << cls.course.getName() << ", Teacher: " << cls.teacher.getName() << "Semester: "<< cls.semester <<", Room: " << cls.room << ", Time: " << cls.startTime << " - " << cls.endTime << endl;
         }
     }
 }
