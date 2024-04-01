@@ -359,18 +359,18 @@ void start(Timetable& timetable, Student& student)
                     {
                         system("cls");
                         cin.ignore();
-                        cout << "1. Registration" << endl;
-                        cout << "2. View timetable" << endl;
-                        cout << "3. Exit" << endl;
+                        //cout << "1. Registration" << endl;
+                        cout << "1. View timetable" << endl;
+                        cout << "2. Exit" << endl;
                         cin >> choice;
+                        //if(choice == '1')
+                        //{
+                        //   cin.ignore();
+                        //    student.registerStudent();
+                        //   system("pause");
+                        //    flag = true;
+                        //}
                         if(choice == '1')
-                        {
-                            cin.ignore();
-                            student.registerStudent();
-                            system("pause");
-                            flag = true;
-                        }
-                        else if(choice == '2')
                         {
                             cout << "Enter your semester: ";
                             cin >> semester;
@@ -378,7 +378,7 @@ void start(Timetable& timetable, Student& student)
                             system("pause");
                             flag = true;
                         }
-                        else if(choice == '3')
+                        else if(choice == '2')
                         {
                             flag = false;
                         }
