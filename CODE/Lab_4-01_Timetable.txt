@@ -1,1 +1,5 @@
 Room: 4-01
+Day: Tuesday, Course: DBMS Lab, Teacher: Engr.Waleed, Semester: 6A, Time: 08:30 - 11:25
+Day: Thursday, Course: OOP Lab, Teacher: Engr.Waleed, Semester: 2B, Time: 08:30 - 11:25
+Day: Thursday, Course: OOP Lab, Teacher: Engr.Waleed, Semester: 2A, Time: 11:30 - 14:25
+Day: Friday, Course: AI Lab, Teacher: Engr.Waleed, Semester: 6A, Time: 08:30 - 11:25
