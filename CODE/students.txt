@@ -1,3 +1,2 @@
-Student ID           Name            Semester
-3182               Abdul          Rafay
-2                   B           3316
+ID: 8920, Name: Abdul Rafay, Semester: 2B
+ID: 7018, Name: Erha Riaz, Semester: 2B

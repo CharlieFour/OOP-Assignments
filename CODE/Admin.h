@@ -12,8 +12,7 @@ class Admin
         Admin(std::string name, std::string password);
         std::string getAdminName();
         std::string getAdminPassword();
-        void setName(std::string name);
-        void setPassword(std::string password);
+        void setIdPass(std::string name, std::string password);
 };
 
 #endif

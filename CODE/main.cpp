@@ -4,9 +4,6 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <limits>
-#include <sstream>
-#include <iostream>
 #include <iomanip>
 #include <Windows.h>
 
@@ -51,7 +48,7 @@ void Student::registerStudent()
     bool uniqueIDFound = false;
     while (!uniqueIDFound) 
     {
-        newStudent.id = rand() % 9000 + 1000; 
+        newStudent.id = to_string(rand() % 9000 + 1000); 
         bool duplicate = false;
         for (const auto& student : students) 
         {
@@ -81,10 +78,9 @@ void Student::saveStudentFile()
         return;
     }
 
-    outFile << "Student ID" << setw(15) << "Name" << setw(20) << "Semester" << endl;
     for (const auto& stu : students) 
     {
-        outFile << stu.id << setw(20) << stu.name << setw(15) << stu.semester << endl;
+        outFile << "ID: " << stu.id << ", Name: " << stu.name << ", Semester: " << stu.semester << endl;
     }
 
     outFile.close();
@@ -98,24 +94,29 @@ void Student::loadStudentFile()
         cerr << "Error: Unable to open file: students.txt" << endl;
         return;
     }
-
-    //Clear the existing data in students vector
-    students.clear();
-
-    string header;
-    getline(inFile, header); //Read nd discard header line
-
-    int id;
-    string name, semester; 
+    string line;
     StudentInfo student;
-    while (inFile >> id >> setw(20) >> name >> setw(15) >> semester)
+    while (getline(inFile, line))
     {
-        student.id = id;
-        student.name = name;
-        student.semester = semester;
-        students.push_back(student);
-    }
+        stringstream ss(line);
+        string id, name, semester, temp;
 
+        //Remove prefix, so when data will save it will be in the correct format
+        //ID
+        ss >> temp >> id;
+        id = id.substr(0, id.size() - 1);
+
+        //Name
+        getline(ss, name, ',');
+        name = name.substr(name.find(":") + 2);
+
+        //Semester
+        getline(ss, semester, ',');
+        semester = semester.substr(semester.find(":") + 2);
+
+        students.push_back({name, semester, id});
+        
+    }
     inFile.close();
 }
  
@@ -137,7 +138,7 @@ void Teacher::setName(std::string name)
 { 
     teacherName = name; 
 }
-void Teacher::setID(std::string id) 
+void Teacher::setID(string id) 
 { 
     teacherID = id; 
 }
@@ -159,15 +160,11 @@ string Admin::getAdminPassword()
 {
     return password;
 }
-void Admin::setName(string name)
+void Admin::setIdPass(string name, string password)
 {
     this->name = name;
-}
-void Admin::setPassword(string password)
-{
     this->password = password;
 }
-
 string Course::getName() const
 {
     return courseName;
@@ -359,18 +356,18 @@ void start(Timetable& timetable, Student& student)
                     {
                         system("cls");
                         cin.ignore();
-                        //cout << "1. Registration" << endl;
-                        cout << "1. View timetable" << endl;
-                        cout << "2. Exit" << endl;
+                        cout << "1. Registration" << endl;
+                        cout << "2. View timetable" << endl;
+                        cout << "3. Exit" << endl;
                         cin >> choice;
-                        //if(choice == '1')
-                        //{
-                        //   cin.ignore();
-                        //    student.registerStudent();
-                        //   system("pause");
-                        //    flag = true;
-                        //}
                         if(choice == '1')
+                        {
+                           cin.ignore();
+                            student.registerStudent();
+                           system("pause");
+                            flag = true;
+                        }
+                        else if(choice == '2')
                         {
                             cout << "Enter your semester: ";
                             cin >> semester;
@@ -378,7 +375,7 @@ void start(Timetable& timetable, Student& student)
                             system("pause");
                             flag = true;
                         }
-                        else if(choice == '2')
+                        else if(choice == '3')
                         {
                             flag = false;
                         }

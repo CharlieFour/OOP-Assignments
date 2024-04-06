@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "Person.h"
 
 class Student 
 {
@@ -11,10 +12,10 @@ class Student
         {
             std::string name;
             std::string semester;
-            int id;
+            std::string id;
 
             StudentInfo() = default;
-            StudentInfo(std::string name, std::string semester, int id) : name(name), semester(semester), id(id) {}
+            StudentInfo(std::string name, std::string semester, std::string id) : name(name), semester(semester), id(id) {}
         };
 
         std::vector<StudentInfo> students;
