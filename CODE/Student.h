@@ -5,10 +5,11 @@
 #include <vector>
 #include "Person.h"
 
-class Student 
+class Student : public Person
 {
     private:
-        struct StudentInfo 
+        std::string semester;
+        /*struct StudentInfo 
         {
             std::string name;
             std::string semester;
@@ -18,13 +19,20 @@ class Student
             StudentInfo(std::string name, std::string semester, std::string id) : name(name), semester(semester), id(id) {}
         };
 
-        std::vector<StudentInfo> students;
+        std::vector<StudentInfo> students;*/
 
     public:
-        void registerStudent();
+        Student() = default;
+        Student(const std::string semester);
+        std::string getStudentName() const;
+        std::string getStudentId() const;
+        std::string getSemester();
+        void setStudentName(const std::string studentName);
+        void setStudentId(const std::string studentId);
+        void setSemester(const std::string semester);
+        /*void registerStudent();
         void saveStudentFile();
-        void loadStudentFile();
+        void loadStudentFile();*/
 };
-
 
 #endif 

@@ -9,11 +9,16 @@
 
 #include "Course.h"
 #include "Teacher.h"
+#include "Room.h"
+#include "Student.h"
 
-class Timetable
+class Timetable : public Student, public Teacher, public Room
 {
     private:
-        struct ClassInfo
+        vector<Teacher> teacher;
+        vector<Student> student;
+        vector<Room> room;
+        /*struct ClassInfo
         {
             Course course;
             Teacher teacher;
@@ -29,10 +34,15 @@ class Timetable
             : course(course), teacher(teacher), room(room), day(day), semester(semester), startTime(startTime), endTime(endTime) {}
         };
 
-        std::vector<ClassInfo> classes;
+        std::vector<ClassInfo> classes;*/
 
     public:
-        void addClass(const Course& course, const Teacher& teacher, const std::string& room, const std::string& day, const std::string& semester, const std::string& startTime, const std::string& endTime);
+        Timetable() = default;
+        Timetable(const vector<Teacher>& teacher, const vector<Student>& student, const vector<Room>& room) : teacher(teacher), student(student), room(room) {}
+        ~Timetable() = default;
+        void addClass(const Teacher& teacher, const Student& student, const Room& room);
+        void removeClass(const Teacher& teacher,const Student& student, const Room& room);
+        //void addClass(const Course& course, const Teacher& teacher, const std::string& room, const std::string& day, const std::string& semester, const std::string& startTime, const std::string& endTime);
         void saveTimetable(const std::string& room, const std::string& filename);
         void loadTimetable(const std::string& filename);
         void printTeacherTimetable(const std::string& teacherName);

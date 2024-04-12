@@ -1,99 +1,38 @@
-#include <iostream>
-#include "FitnessClass.h"
-
+#include<bits/stdc++.h>
 using namespace std;
 
-int main()
-{
-    // Create a FitnessClass object
-    FitnessClass yoga("Yoga", 10);
+int main(){
 
-    // Add some time slots
-    yoga.addTimeSlot("Monday 9:00 AM");
-    yoga.addTimeSlot("Wednesday 6:00 PM");
+    int rows;
+    // Getting the number of rows.
+    cout << "Enter the Number of rows - ";
+    cin >> rows;
 
-    // User Interface
-    cout << "Welcome to the Fitness Class Booking System" << endl;
-    cout << "Available Fitness Class: " << yoga.getClassName() << endl;
-    cout << "Capacity: " << yoga.getCapacity() << " people" << endl;
+    cout << "Pascal's Triangle of " << rows << " rows." << endl;
 
-    // Display available time slots
-    yoga.displayAvailableSlots();
+    // Main logic to print Pascal's triangle.
+    for( int i = 0; i <  rows; i++){
+        int spaces = rows - i;
+        // Print spaces.
+        for( int j = 0; j < spaces; j++){
+            cout<<"  ";
+        }
 
-    // Booking
-    string selectedTime;
-    cout << "Enter the time slot you want to book: ";
-    getline(cin, selectedTime);
+        int coefficient;
+        // Print values.
+        for( int j = 0; j <= i; j++){
+            // Update coefficient's value
+            if( j == 0 )
+                coefficient = 1;
+            else 
+                coefficient = coefficient * (i - j + 1) / j;
 
-    // Attempt to book the selected time slot
-    if (yoga.bookSlot(selectedTime)) {
-        cout << "Booking successful for " << selectedTime << endl;
-    } else {
-        cout << "Sorry, the selected time slot is fully booked or invalid." << endl;
+            cout << coefficient << "   ";
+        }
+
+        cout << endl;
     }
 
-    // Display updated bookings
-    cout << "Updated Bookings:" << endl;
-    yoga.displayBookings();
 
     return 0;
-}
-//method defination
-FitnessClass::FitnessClass(const string& name, int capacity) : className(name), capacity(capacity) {}
-
-std::string FitnessClass::getClassName() const
-{
-    return className;
-}
-
-int FitnessClass::getCapacity() const
-{
-    return capacity;
-}
-
-bool FitnessClass::addTimeSlot(const string& time)
-{
-    timeSlots.push_back(time);
-    return true;
-}
-
-bool FitnessClass::bookSlot(const string& time)
-{
-    if (bookings.size() < capacity)
-    {
-        bookings.push_back(time);
-        return true;
-    }
-    return false; // Capacity reached
-}
-
-bool FitnessClass::cancelBooking(const string& time)
-{
-    for (auto it = bookings.begin(); it != bookings.end(); ++it)
-    {
-        if (*it == time)
-        {
-            bookings.erase(it);
-            return true;
-        }
-    }
-    return false; // Booking not found
-}
-
-void FitnessClass::displayAvailableSlots() const
-{
-    cout << "Available time slots for " << className << " class:" << endl;
-    for(const auto& slot : timeSlots)
-    {
-        cout << slot << endl;
-    }
-}
-
-void FitnessClass::displayBookings() const
-{
-    cout << "Bookings for " << className << " class:" << endl;
-    for (const auto& booking : bookings)
-    {
-        cout << booking << endl;
-    }
 }

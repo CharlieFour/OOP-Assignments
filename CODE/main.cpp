@@ -12,6 +12,7 @@
 #include "Course.h"
 #include "Student.h"
 #include "TimeTable.h" 
+#include "Room.h"
 
 using namespace std;
 
@@ -29,9 +30,80 @@ int main()
     saveFiles(timetable, student);//Saving all the files
     return 0;
 }
+//-------------------------------------
+//Person
+string Person::getName() const
+{
+    return name;
+}
 
-//create file for student counter 
+string Person::getId() const
+{
+    return id;
+}
 
+void Person::setName(string name)
+{
+    this->name = name;
+}
+
+void Person::setId(string id)
+{
+    this->id = id;
+}
+//Student 
+string Student::getStudentName() const
+{
+    return this->getName();
+}
+string Student::getSemester()
+{
+    return semester;
+}
+
+void Student::setSemester(string semester)
+{
+    this->semester = semester;
+}
+//-------------------------------------
+//Teacher
+
+//-------------------------------------
+//Room
+string Room::getRoomNumber() const
+{
+    return roomNumber;
+}
+
+string Room::getSlot() const
+{
+    return slot;
+}
+
+string Room::getDay() const
+{
+    return day;
+}
+
+void Room::setSlot(string slot)
+{
+    this->slot = slot;
+}
+
+void Room::setRoomNumber(string roomNumber)
+{
+    this->roomNumber = roomNumber;
+}
+
+void Room::setDay(string day)
+{
+    this->day = day;
+}
+//-------------------------------------
+//Admin
+
+
+/*
 void Student::registerStudent() 
 {
     StudentInfo newStudent;
@@ -326,7 +398,7 @@ void Timetable::printDayTimetable(const string& day, const string room)
     }
 }
 //-------------------------------------------------------------------------
-
+*/
 void start(Timetable& timetable, Student& student)
 {
     bool flag = true;
