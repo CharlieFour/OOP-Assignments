@@ -52,10 +52,6 @@ void Person::setId(string id)
     this->id = id;
 }
 //Student 
-string Student::getStudentName() const
-{
-    return this->getName();
-}
 string Student::getSemester()
 {
     return semester;
@@ -98,6 +94,41 @@ void Room::setRoomNumber(string roomNumber)
 void Room::setDay(string day)
 {
     this->day = day;
+}
+//-------------------------------------
+//Course
+string Course::getCourseName() const
+{
+    return courseName;
+}
+
+void Course::setCourseName(string courseName) const
+{
+    this->courseName = courseName;
+}
+//-------------------------------------
+//Admin
+string Admin::getAdminPassword() const
+{
+    return password;
+}
+
+void Admin::setIdPass(string id, string password)
+{
+    setName(id);
+    this->password = password;
+}
+
+bool Admin::checkIdPass(string id, string password)
+{
+    if(getName() == id && this->password == password)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 //-------------------------------------
 //Admin
