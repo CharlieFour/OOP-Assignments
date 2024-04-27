@@ -3,14 +3,14 @@
 
 #include <string>
 
+
 class Course
 {
     private:
         std::string courseName;
-        std::string courseCredits;
     public:
         Course() = default;
-        Course(std::string courseName, std::string courseCredits) : courseName(courseName), courseCredits(courseCredits) {}
+        Course(std::string courseName) : courseName(courseName) {}
         /*Course() = default;
         Course(std::string name) : courseName(name) {}
         Course(std::string name, Teacher teacher, int credits) : courseName(name), courseTeacher(teacher), courseCredits(credits) {}

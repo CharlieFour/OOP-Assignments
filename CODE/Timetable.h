@@ -15,9 +15,9 @@
 class Timetable : public Student, public Teacher, public Room
 {
     private:
-        vector<Teacher> teacher;
-        vector<Student> student;
-        vector<Room> room;
+        vector<Teacher*> teacher;
+        vector<Student*> student;
+        vector<Room*> room;
         /*struct ClassInfo
         {
             Course course;
@@ -38,7 +38,7 @@ class Timetable : public Student, public Teacher, public Room
 
     public:
         Timetable() = default;
-        Timetable(const vector<Teacher>& teacher, const vector<Student>& student, const vector<Room>& room) : teacher(teacher), student(student), room(room) {}
+        Timetable(const vector<Teacher*> teacher, const vector<Student*> student, const vector<Room*> room) : teacher(teacher), student(student), room(room) {}
         ~Timetable() = default;
         void addClass(const Teacher& teacher, const Student& student, const Room& room);
         void removeClass(const Teacher& teacher,const Student& student, const Room& room);

@@ -8,9 +8,8 @@ class Teacher : public Person, public Course
 { 
     public:
         Teacher() = default;
-        Teacher(const std::string id, const std::string name) : Person(id, name) {}
-        Teacher(const std::string course, const std::string courseCredits) : Course(course, courseCredits) {}
-        
+        Teacher(const std::string id, const std::string name, const std::string course) : Person(id, name), Course(course) {}
+        ~Teacher()	= default;
         /*Teacher() = default;
         Teacher(std::string name) : teacherName(name) {}
         Teacher(std::string name, std::string id, std::string course) : teacherName(name), teacherID(id), teacherCourse(course) {}

@@ -24,11 +24,7 @@ class Student : public Person
     public:
         Student() = default;
         Student(const std::string semester);
-        std::string getStudentName() const;
-        std::string getStudentId() const;
         std::string getSemester();
-        void setStudentName(const std::string studentName);
-        void setStudentId(const std::string studentId);
         void setSemester(const std::string semester);
         /*void registerStudent();
         void saveStudentFile();
