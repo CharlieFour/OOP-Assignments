@@ -168,9 +168,12 @@ class Admin: public Person
         }
         bool checkStudent(const std::string id)
         {
-            if(this->getId() == id)
+            for(const auto& cls : students)
             {
-                return true;
+                if(cls->getId() == id)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -205,17 +208,6 @@ class Admin: public Person
                 students.push_back(new Student(semester, name, id));
             }
             inFile.close();
-        }
-        bool checkStudentId(string id)
-        {
-            if(this->getId() == id)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 };
 
