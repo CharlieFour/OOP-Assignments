@@ -505,4 +505,7 @@ int main()
         cin >> i;
     }
     student.saveStudentFile();*/
+    /*Admin admin;
+    string name , courseName, courseId;
+    admin.registerTeacher(name, courseName, courseId);*/
 }
