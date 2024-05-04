@@ -50,6 +50,11 @@ class Admin: public Person
             }
             return false;
         }
+        void changeIdPassword(const std::string& id, const std::string& password)
+        {
+            this->setName(id);
+            this->setId(password);
+        }
         void saveAdminFile()
         {
             ofstream file("admin.txt");
@@ -92,6 +97,16 @@ class Admin: public Person
             cout << "\nStudent ID: " << id << endl;
             teachers.push_back(teacher);
             system("pause");
+        }
+        void removeTeacher(std::string id)
+        {
+            for(auto it = teachers.rbegin(); it != teachers.rend(); ++it)
+            {
+                if((*it)->getId() == id)
+                {
+                    teachers.erase(std::next(it).base());
+                }
+            }
         }
         bool checkTeacher(const std::string id)
         {
@@ -165,6 +180,16 @@ class Admin: public Person
             cout << "\nStudent ID: " << id << endl;
             this->students.push_back(student);
             system("pause");
+        }
+        void removeStudent(std::string id)
+        {
+            for(auto it = students.rbegin(); it != students.rend(); ++it)
+            {
+                if((*it)->getId() == id)
+                {
+                    students.erase(std::next(it).base());
+                }
+            }
         }
         bool checkStudent(const std::string id)
         {
@@ -483,11 +508,15 @@ class Timetable
             {
                 if(r->getSlot() == stoi(slot1) && r->getRoomNumber() == roomNumber1 && r->getDay() == day1)
                 {
-                    
+                    r->setSlot(slot2);
+                    r->setRoomNumber(roomNumber2);
+                    r->setDay(day2);
                 }
                 else if(r->getSlot() == stoi(slot2) && r->getRoomNumber() == roomNumber2 && r->getDay() == day2)
                 {
-                    
+                    r->setSlot(slot1);
+                    r->setRoomNumber(roomNumber1);
+                    r->setDay(day1);
                 }
             }
         }
@@ -505,7 +534,7 @@ int main()
         cin >> i;
     }
     student.saveStudentFile();*/
-    /*Admin admin;
+    Admin admin;
     string name , courseName, courseId;
-    admin.registerTeacher(name, courseName, courseId);*/
+    admin.registerTeacher(name, courseName, courseId);
 }
