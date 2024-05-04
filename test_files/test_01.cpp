@@ -33,209 +33,6 @@ class Person
         }
 };
 
-class Admin: public Person
-{
-    public:
-        vector<Teacher*> teachers;
-        vector<Student*> students;
-        Course* courses;
-        Admin() = default;
-        Admin(std::string password, std::string name) : Person(password, name) {}
-        ~Admin() = default;
-        bool checkIdPass(std::string name, std::string password)
-        {
-            if(this->getName() == name && this->getId() == password)
-            {
-                return true;
-            }
-            return false;
-        }
-        void changeIdPassword(const std::string& id, const std::string& password)
-        {
-            this->setName(id);
-            this->setId(password);
-        }
-        void saveAdminFile()
-        {
-            ofstream file("admin.txt");
-            file << this->getName() << " " << this->getId() << endl;
-            file.close();
-        }
-        void loadAdminFile()
-        {
-            ifstream file("admin.txt");
-            string name, password;
-            file >> name >> password;
-            this->setName(name);
-            this->setId(password);
-            file.close();
-        }
-        void registerTeacher(std::string name, std::string courseName, std::string courseId)
-        {
-            std::string id;
-            srand(time(nullptr)); 
-            bool uniqueIDFound = false;
-            while (!uniqueIDFound) 
-            {
-                id = to_string(rand() % 9000 + 8000); 
-                bool duplicate = false;
-                for (const Teacher* t : teachers)
-                {
-                    if (id == t->getId()){
-                        duplicate = true;
-                        break;
-                    }
-                }
-                if (!duplicate) 
-                {
-                    uniqueIDFound = true;
-                }
-            }
-            Course* course = new Course(courseName, courseId);
-            Teacher* teacher = new Teacher(id, name, course);
-            cout << "\nStudent registered successfully!" << endl;
-            cout << "\nStudent ID: " << id << endl;
-            teachers.push_back(teacher);
-            system("pause");
-        }
-        void removeTeacher(std::string id)
-        {
-            for(auto it = teachers.rbegin(); it != teachers.rend(); ++it)
-            {
-                if((*it)->getId() == id)
-                {
-                    teachers.erase(std::next(it).base());
-                }
-            }
-        }
-        bool checkTeacher(const std::string id)
-        {
-            for(const auto& cls : teachers)
-            {
-                if(cls->getId() == id)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-         void saveTeacherFile()
-        {
-            ofstream outFile("teacher.txt");	
-            if(!outFile)
-            {
-                cerr << "Error: Unable to open file: " << "teacher.txt" << endl;
-                return;
-            }
-            for(const auto& cls : teachers)
-            {
-                outFile << cls->getId() << " " << cls->getName() << " " << cls->course->getCourseName() << " " << cls->course->getCourseId() << endl;
-            }
-
-            outFile.close();
-        }
-        void loadTeacherFile()
-        {
-            string name, id, courseName, courseId;
-            ifstream inFile("teacher.txt");
-            if (!inFile)
-            {
-                cerr << "Error: Unable to open file: " << "teacher.txt" << endl;
-                return;
-            }
-            string line;
-            while (getline(inFile, line))
-            {
-                inFile >> name >> id >> courseName >> courseId;
-                Course* course = new Course(courseName, courseId);
-                Teacher* teacher = new Teacher(id, name, course);
-                teachers.push_back(teacher);
-            }
-            inFile.close();
-        }
-        void registerStudent(std::string name, std::string semester)
-        {  
-            string id;
-            srand(time(nullptr)); 
-            bool uniqueIDFound = false;
-            while (!uniqueIDFound) 
-            {
-                id = to_string(rand() % 8000 + 1000); 
-                bool duplicate = false;
-                for (const auto& student : students) 
-                {
-                    if (student->getId() == id) 
-                    {
-                        duplicate = true;
-                        break;
-                    }
-                }
-                if (!duplicate) 
-                {
-                    uniqueIDFound = true;
-                }
-            }
-            Student* student = new Student(semester, name, id);
-            cout << "\nStudent registered successfully!" << endl;
-            cout << "\nStudent ID: " << id << endl;
-            this->students.push_back(student);
-            system("pause");
-        }
-        void removeStudent(std::string id)
-        {
-            for(auto it = students.rbegin(); it != students.rend(); ++it)
-            {
-                if((*it)->getId() == id)
-                {
-                    students.erase(std::next(it).base());
-                }
-            }
-        }
-        bool checkStudent(const std::string id)
-        {
-            for(const auto& cls : students)
-            {
-                if(cls->getId() == id)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        void saveStudentFile()
-        {
-            ofstream outFile("student.txt");
-            if (!outFile)
-            {
-                cerr << "Error: Unable to open file: " << "student.txt" << endl;
-                return;
-            }
-            for (const auto& cls : students)
-            {
-                outFile << cls->getId() << " " << cls->getName() << " " << cls->getSemester() << endl;
-            }
-
-            outFile.close();
-        }
-        void loadStudentFile()
-        {
-            string name, id, semester;
-            ifstream inFile("student.txt");
-            if (!inFile)
-            {
-                cerr << "Error: Unable to open file: " << "student.txt" << endl;
-                return;
-            }
-            string line;
-            while (getline(inFile, line))
-            {
-                inFile >> id >> name >> semester;
-                students.push_back(new Student(semester, name, id));
-            }
-            inFile.close();
-        }
-};
-
 class Course
 {
     private:
@@ -268,6 +65,22 @@ class Course
                 return this->getCourseName();
             }
             return "";
+        }
+};
+class Teacher : public Person 
+{
+    public:
+        Course* course;
+        Teacher() = default;
+        Teacher(std::string id, std::string name, Course* course) : Person(id, name), course(course) {}
+        ~Teacher() = default;
+        void setCourseId(string courseId)
+        {
+            course->setCourseId(courseId);
+        }
+        std::string getCourseId()
+        {
+            return this->getCourseId();
         }
 };
 
@@ -377,20 +190,226 @@ class Student : public Person
         }
 };
 
-class Teacher : public Person 
+class Admin: public Person
 {
     public:
-        Course* course;
-        Teacher() = default;
-        Teacher(std::string id, std::string name, Course* course) : Person(id, name), course(course) {}
-        ~Teacher() = default;
-        void setCourseId(string courseId)
+        vector<Teacher*> teachers;
+        vector<Student*> students;
+        Course* courses;
+        Admin() = default;
+        Admin(std::string password, std::string name) : Person(password, name) {}
+        ~Admin() = default;
+        bool checkIdPass(std::string name, std::string password)
         {
-            course->setCourseId(courseId);
+            if(this->getName() == name && this->getId() == password)
+            {
+                return true;
+            }
+            return false;
         }
-        std::string getCourseId()
+        void changeIdPassword(const std::string& id, const std::string& password)
         {
-            return this->getCourseId();
+            this->setName(id);
+            this->setId(password);
+        }
+        void saveAdminFile()
+        {
+            ofstream file("admin.txt");
+            file << this->getName() << " " << this->getId() << endl;
+            file.close();
+        }
+        void loadAdminFile()
+        {
+            ifstream file("admin.txt");
+            string name, password;
+            file >> name >> password;
+            this->setName(name);
+            this->setId(password);
+            file.close();
+        }
+        void registerTeacher(std::string name, std::string courseName, std::string courseId)
+        {
+            std::string id;
+            srand(time(nullptr)); 
+            bool uniqueIDFound = false;
+            while (!uniqueIDFound) 
+            {
+                id = to_string(rand() % 1000 + 8000); 
+                bool duplicate = false;
+                for (const Teacher* t : teachers)
+                {
+                    if (id == t->getId()){
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate) 
+                {
+                    uniqueIDFound = true;
+                }
+            }
+            Course* course = new Course(courseName, courseId);
+            Teacher* teacher = new Teacher(id, name, course);
+            cout << "\nTeacher registered successfully!" << endl;
+            cout << "\nTeacher ID: " << id << endl;
+            teachers.push_back(teacher);
+            system("pause");
+        }
+        void removeTeacher(std::string id)
+        {
+            for(auto it = teachers.rbegin(); it != teachers.rend(); ++it)
+            {
+                if((*it)->getId() == id)
+                {
+                    teachers.erase(std::next(it).base());
+                }
+            }
+        }
+        bool checkTeacher(const std::string id)
+        {
+            for(const auto& cls : teachers)
+            {
+                if(cls->getId() == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+         void saveTeacherFile()
+        {
+            ofstream outFile("teacher.txt");	
+            if(!outFile)
+            {
+                cerr << "Error: Unable to open file: " << "teacher.txt" << endl;
+                return;
+            }
+            for(const auto& cls : teachers)
+            {
+                outFile << "ID:" << cls->getId() << ", Name:" << cls->getName() << ", CourseName:" << cls->course->getCourseName() << ", CourseId:" << cls->course->getCourseId() << endl;
+            }
+            cout << "Teacher saved successfully!" << endl;
+
+            outFile.close();
+        }
+        void loadTeacherFile()
+        {
+            string id, name, courseName, courseId;
+            ifstream inFile("teacher.txt");
+            if (!inFile)
+            {
+                cerr << "Error: Unable to open file: " << "teacher.txt" << endl;
+                return;
+            }
+
+            string line;
+            while (getline(inFile, line))
+            {
+                // Find positions of the fields in the line
+                size_t idPos = line.find("ID:");
+                size_t namePos = line.find("Name:");
+                size_t courseNamePos = line.find("CourseName:");
+                size_t courseIdPos = line.find("CourseId:");
+
+                // Extract data from the line based on positions
+                id = line.substr(idPos + 4, namePos - (idPos + 5)); // Extract ID
+                name = line.substr(namePos + 6, courseNamePos - (namePos + 7)); // Extract Name
+                courseName = line.substr(courseNamePos + 11, courseIdPos - (courseNamePos + 12)); // Extract CourseName
+                courseId = line.substr(courseIdPos + 9); // Extract CourseId
+
+                // Create course object
+                Course* course = new Course(courseName, courseId);
+                // Create teacher object
+                Teacher* teacher = new Teacher(id, name, course);
+                // Add teacher to the vector
+                teachers.push_back(teacher);
+            }
+
+            cout << "Teacher loaded successfully!" << endl;
+            inFile.close();
+        }
+        void registerStudent(std::string name, std::string semester)
+        {  
+            string id;
+            srand(time(nullptr)); 
+            bool uniqueIDFound = false;
+            while (!uniqueIDFound) 
+            {
+                id = to_string(rand() % 8000 + 1000); 
+                bool duplicate = false;
+                for (const auto& student : students) 
+                {
+                    if (student->getId() == id) 
+                    {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate) 
+                {
+                    uniqueIDFound = true;
+                }
+            }
+            Student* student = new Student(semester, name, id);
+            cout << "\nStudent registered successfully!" << endl;
+            cout << "\nStudent ID: " << id << endl;
+            this->students.push_back(student);
+            system("pause");
+        }
+        void removeStudent(std::string id)
+        {
+            for(auto it = students.rbegin(); it != students.rend(); ++it)
+            {
+                if((*it)->getId() == id)
+                {
+                    students.erase(std::next(it).base());
+                }
+            }
+        }
+        bool checkStudent(const std::string id)
+        {
+            for(const auto& cls : students)
+            {
+                if(cls->getId() == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        void saveStudentFile()
+        {
+            ofstream outFile("student.txt");
+            if (!outFile)
+            {
+                cerr << "Error: Unable to open file: " << "student.txt" << endl;
+                return;
+            }
+            for (const auto& cls : students)
+            {
+                outFile << cls->getId() << " " << cls->getName() << " " << cls->getSemester() << endl;
+            }
+            cout << "Student saved successfully!" << endl;
+
+            outFile.close();
+        }
+        void loadStudentFile()
+        {
+            string name, id, semester;
+            ifstream inFile("student.txt");
+            if (!inFile)
+            {
+                cerr << "Error: Unable to open file: " << "student.txt" << endl;
+                return;
+            }
+            string line;
+            while (getline(inFile, line))
+            {
+                inFile >> id >> name >> semester;
+                students.push_back(new Student(semester, name, id));
+            }
+            cout << "Student loaded successfully!" << endl;
+            inFile.close();
         }
 };
 
@@ -535,6 +554,8 @@ int main()
     }
     student.saveStudentFile();*/
     Admin admin;
-    string name , courseName, courseId;
-    admin.registerTeacher(name, courseName, courseId);
+    admin.loadTeacherFile();
+    /*string name = "Dr.Tamim", courseName = "OOP", courseId = "1234";
+    admin.registerTeacher(name, courseName, courseId);*/
+    admin.saveTeacherFile();
 }
