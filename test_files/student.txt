@@ -1,2 +1,2 @@
-6752 Abdul Rafay 2B
-6781 Erha Riaz 2B
+ID: 6752,,,,, Name:bdul Rafay,,,,, Semester: 2B
+ID: 6781,,,,, Name:rha Riaz,,,,, Semester: 2B

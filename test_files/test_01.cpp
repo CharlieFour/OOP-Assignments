@@ -387,7 +387,7 @@ class Admin: public Person
             }
             for (const auto& cls : students)
             {
-                outFile << cls->getId() << " " << cls->getName() << " " << cls->getSemester() << endl;
+                outFile << "ID:" << cls->getId() << ", Name:" << cls->getName() << ", Semester:" << cls->getSemester() << endl;
             }
             cout << "Student saved successfully!" << endl;
 
@@ -405,7 +405,16 @@ class Admin: public Person
             string line;
             while (getline(inFile, line))
             {
-                inFile >> id >> name >> semester;
+                // Find positions of the fields in the line
+                size_t idPos = line.find("ID:");
+                size_t namePos = line.find("Name:");
+                size_t SemesterPos = line.find("Semester:");
+
+                // Extract data from the line based on positions
+                id = line.substr(idPos + 3, namePos - (idPos + 4)); // Extract ID
+                name = line.substr(namePos + 7, SemesterPos - (namePos + 8)); // Extract Name
+                semester = line.substr(SemesterPos + 9); // Extract CourseName
+
                 students.push_back(new Student(semester, name, id));
             }
             cout << "Student loaded successfully!" << endl;
@@ -555,7 +564,9 @@ int main()
     student.saveStudentFile();*/
     Admin admin;
     admin.loadTeacherFile();
+    admin.loadStudentFile();
     /*string name = "Dr.Tamim", courseName = "OOP", courseId = "1234";
     admin.registerTeacher(name, courseName, courseId);*/
+    admin.saveStudentFile();
     admin.saveTeacherFile();
 }
