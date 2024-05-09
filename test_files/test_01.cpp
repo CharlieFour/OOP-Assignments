@@ -215,17 +215,20 @@ class Admin: public Person
         void saveAdminFile()
         {
             ofstream file("admin.txt");
-            file << this->getName() << " " << this->getId() << endl;
+            file << this->getName() << "," << this->getId() << endl;
             file.close();
         }
         void loadAdminFile()
         {
-            ifstream file("admin.txt");
-            string name, password;
-            file >> name >> password;
-            this->setName(name);
-            this->setId(password);
-            file.close();
+            std::ifstream inFile("admin.txt");
+            std::string username, password;
+            if (std::getline(inFile, username, ',') && std::getline(inFile, password))
+            {
+                this->setName(username);
+                this->setId(password);
+            }
+
+            inFile.close();
         }
         void registerTeacher(std::string name, std::string courseName, std::string courseId)
         {
@@ -449,18 +452,18 @@ class Timetable
                 }
             }
         }
-        void saveTimetable(const std::string& room, const std::string& filename)
+        void saveTimetable()
         {
-            ofstream file(filename);
+            ofstream file("timetable.txt");
             for(const auto& r : rooms)
             {
-                file << r->getRoomNumber() << " " << r->getSlot() << " " << r->getDay() << " " << r->getSemester() << " " << r->getCourseId() << endl;
+                file <<"Room:" << r->getRoomNumber() << ",  " << r->getSlot() << " " << r->getDay() << " " << r->getSemester() << " " << r->getCourseId() << endl;
             }
             file.close();
         }
-        void loadTimetable(const std::string& filename)
+        void loadTimetable()
         {
-            ifstream file(filename);
+            ifstream file("timetable.txt");
             string roomNumber, slot, day, semester, courseId;
             while(file >> roomNumber >> slot >> day >> semester >> courseId)
             {
@@ -563,10 +566,23 @@ int main()
     }
     student.saveStudentFile();*/
     Admin admin;
+    string a;
     admin.loadTeacherFile();
     admin.loadStudentFile();
+    admin.loadAdminFile();
+    admin.registerStudent("Ahmed", "1");
+    cout << "Enter student ID to check : ";
+    cin >> a;
+    bool chk = admin.checkTeacher(a);
+    if(chk)
+    {
+        cout << "\ntrue";
+    } 
+    else 
+    cout << "fales";
     /*string name = "Dr.Tamim", courseName = "OOP", courseId = "1234";
     admin.registerTeacher(name, courseName, courseId);*/
     admin.saveStudentFile();
     admin.saveTeacherFile();
+    admin.saveAdminFile();
 }

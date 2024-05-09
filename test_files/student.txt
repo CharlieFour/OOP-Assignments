@@ -1,2 +1,9 @@
-ID: 6752,,,,, Name:bdul Rafay,,,,, Semester: 2B
-ID: 6781,,,,, Name:rha Riaz,,,,, Semester: 2B
+ID: 6752,,,,,,,,,,,,,, Name:,,,,,, Semester: 2B
+ID: 6781,,,,,,,,,,,,,, Name:,,,, Semester: 2B
+ID:3579,,,,,,, Name:Semester:1st, Semester:1st
+ID:8526,,,,,, Name:, Semester:1st
+ID:8755,,,,, Name:,, Semester:1st
+ID:8944,,,, Name:,,, Semester:1st
+ID:5644,,, Name:d,,, Semester:1st
+ID:3067,, Name:med,, Semester:1
+ID:3195, Name:Ahmed, Semester:1
