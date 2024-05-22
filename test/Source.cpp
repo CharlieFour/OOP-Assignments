@@ -1,10 +1,9 @@
-#include <iostream>
-#include <conio.h>
-#include <fstream>
+﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <algorithm>
 #include <sstream>
-
 using namespace std;
 
 class Person
@@ -38,68 +37,146 @@ class Course
 {
 private:
     std::string courseName;
-    std::string courseCode;
-    std::string courseSemester;
+    std::string courseId;
 public:
     Course() = default;
-    Course(std::string courseName, std::string courseCode, std::string courseSemester) : courseName(courseName), courseCode(courseCode) , courseSemester(courseSemester) {}
+    Course(std::string courseName, std::string courseId) : courseName(courseName), courseId(courseId) {}
     ~Course() = default;
     std::string getCourseName() const
     {
         return this->courseName;
     }
-    std::string getCourseSemester() const
+    std::string getCourseId() const
     {
-        return this->courseSemester;
-    }
-    std::string getCourseCode() const
-    {
-        return this->courseCode;
+        return this->courseId;
     }
     void setCourseName(std::string courseName)
     {
         this->courseName = courseName;
     }
-    void setCourseSemester(std::string courseSemester)
+    void setCourseId(std::string courseId)
     {
-        this->courseSemester = courseSemester;
+        this->courseId = courseId;
     }
-    void setCourseCode(std::string courseCode)
+    std::string courseDetails(std::string courseId)
     {
-        this->courseCode = courseCode;
-    }
-    std::string courseDetails(std::string courseCode)
-    {
-        if (this->getCourseCode() == courseCode)
+        if (this->getCourseId() == courseId)
         {
             return this->getCourseName();
         }
         return "";
     }
 };
-
 class Teacher : public Person
 {
-private:
-    string courseCode;
 public:
+    Course* course;
     Teacher() = default;
-    Teacher(std::string id, std::string name, std::string courseCode) : Person(id, name), courseCode(courseCode) {}
-    ~Teacher() = default;
-    void setCourse(string courseCode)
-    {
-        this->courseCode = courseCode;
+    Teacher(std::string id, std::string name, Course* course) : Person(id, name) {
+        this->course = course;
     }
-    std::string getCourseCode()
+    ~Teacher() = default;
+    void setCourseId(string courseId)
     {
-        return courseCode;
+        course->setCourseId(courseId);
+    }
+    std::string getCourseId()
+    {
+        return course->getCourseId();
+    }
+};
+
+class Room
+{
+private:
+    std::string roomNumber;
+    int slot;
+    std::string day;
+    std::string semester;
+    std::string courseId;
+public:
+    Room() = default;
+    Room(std::string roomNumber, int slot, std::string day, std::string semester, std::string courseId) : roomNumber(roomNumber), slot(slot), day(day), semester(semester), courseId(courseId) {}
+    std::string checkRoomSlot(int slot)
+    {
+        if (slot == 1)
+        {
+            return "8:30 - 9:25";
+        }
+        else if (slot == 2)
+        {
+            return "9:30 - 10:25";
+        }
+        else if (slot == 3)
+        {
+            return "10:30 - 11:25";
+        }
+        else if (slot == 4)
+        {
+            return "11:30 - 12:25";
+        }
+        else if (slot == 5)
+        {
+            return "12:30 - 1:25";
+        }
+        else if (slot == 6)
+        {
+            return "1:30 - 2:25";
+        }
+        else if (slot == 7)
+        {
+            return "2:30 - 3:25";
+        }
+        else if (slot == 8)
+        {
+            return "3:30 - 4:25";
+        }
+        return "Invalid Slot";
+    }
+    std::string getRoomNumber() const
+    {
+        return this->roomNumber;
+    }
+    int getSlot() const
+    {
+        return this->slot;
+    }
+    std::string getDay() const
+    {
+        return this->day;
+    }
+    void setDay(std::string day)
+    {
+        this->day = day;
+    }
+    void setRoomNumber(std::string roomNumber)
+    {
+        this->roomNumber = roomNumber;
+    }
+    void setSlot(std::string slot)
+    {
+        this->slot = stoi(slot);
+    }
+    std::string getSemester() const
+    {
+        return this->semester;
+    }
+    void setSemester(std::string semester)
+    {
+        this->semester = semester;
+    }
+    std::string getCourseId() const
+    {
+        return this->courseId;
+    }
+    void setCourseId(std::string courseId)
+    {
+        this->courseId = courseId;
     }
 };
 
 class Student : public Person
 {
-private:
-    std::string semester;
 public:
     vector<Student*> students;
     std::string semester;
@@ -109,26 +186,19 @@ public:
     {
         return this->semester;
     }
-    std::string getStudentSemester()
-    {
-        return this->semester;
-    }
-    void setStudentSemester(const std::string semester)
-    {
-        this->semester = semester;
-    }
     void setSemester(const std::string semester)
     {
         this->semester = semester;
     }
-};      
+};
+
 class Admin : public Person
 {
 public:
     friend class Timetable;
     vector<Teacher*> teachers;
     vector<Student*> students;
-    vector<Course*> courses;
+    Course* courses;
     Admin() = default;
     Admin(std::string password, std::string name) : Person(password, name) {}
     ~Admin() = default;
@@ -163,7 +233,7 @@ public:
 
         inFile.close();
     }
-    void registerTeacher(std::string name, std::string courseCode)
+    void registerTeacher(std::string name, std::string courseName, std::string courseId)
     {
         std::string id;
         srand(time(nullptr));
@@ -184,7 +254,8 @@ public:
                 uniqueIDFound = true;
             }
         }
-        Teacher* teacher = new Teacher(id, name, courseCode);
+        Course* course = new Course(courseName, courseId);
+        Teacher* teacher = new Teacher(id, name, course);
         cout << "\nTeacher registered successfully!" << endl;
         cout << "\nTeacher ID: " << id << endl;
         teachers.push_back(teacher);
@@ -192,13 +263,11 @@ public:
     }
     void removeTeacher(std::string id)
     {
-        for (auto it = teachers.begin(); it != teachers.end(); ++it)
+        for (auto it = teachers.rbegin(); it != teachers.rend(); ++it)
         {
             if ((*it)->getId() == id)
             {
-                delete (*it);
-                teachers.erase(it);
-                break;
+                teachers.erase(std::next(it).base());
             }
         }
     }
@@ -208,18 +277,6 @@ public:
         {
             if (cls->getId() == id)
             {
-                return true;
-            }
-        }
-        return false;
-    }
-    bool checkTeacher(const std::string id, std::string &tn)
-    {
-        for (const auto& cls : teachers)
-        {
-            if (cls->getId() == id)
-            {
-                tn = cls->getName();
                 return true;
             }
         }
@@ -235,7 +292,7 @@ public:
         }
         for (const auto& cls : teachers)
         {
-            outFile << cls->getId() << "," << cls->getName() << "," << cls->getCourseCode() << endl;
+            outFile << cls->getId() << "," << cls->getName() << "," << cls->course->getCourseName() << "," << cls->course->getCourseId() << endl;
         }
         cout << "Teacher saved successfully!" << endl;
 
@@ -243,7 +300,7 @@ public:
     }
     void loadTeacherFile()
     {
-        string id, name, courseCode;
+        string id, name, courseName, courseId;
         ifstream inFile("teacher.txt", std::ios::in);
         if (!inFile)
         {
@@ -259,9 +316,10 @@ public:
 
                 getline(ss, id, ',');
                 getline(ss, name, ',');
-                getline(ss, courseCode, ',');
+                getline(ss, courseName, ',');
+                getline(ss, courseId, ',');
 
-                Teacher* t = new Teacher(id, name, courseCode);
+                Teacher* t = new Teacher(id, name, (new Course(courseName, courseId)));
 
                 teachers.push_back(t);
             }
@@ -300,13 +358,11 @@ public:
     }
     void removeStudent(std::string id)
     {
-        for (auto it = students.begin(); it != students.end(); ++it)
+        for (auto it = students.rbegin(); it != students.rend(); ++it)
         {
             if ((*it)->getId() == id)
             {
-                delete (*it);
-                students.erase(it);
-                break;
+                students.erase(std::next(it).base());
             }
         }
     }
@@ -316,18 +372,6 @@ public:
         {
             if (cls->getId() == id)
             {
-                return true;
-            }
-        }
-        return false;
-    }
-    bool checkStudent(const std::string id, std::string &sem)
-    {
-        for (const auto& cls : students)
-        {
-            if (cls->getId() == id)
-            {
-                sem = cls->getSemester();
                 return true;
             }
         }
@@ -375,154 +419,41 @@ public:
         cout << "Student loaded successfully!" << endl;
         inFile.close();
     }
-    void addCourse(std::string courseName, std::string courseCode, std::string courseSemester)
-    {
-        Course* course = new Course(courseName, courseCode, courseSemester);
-        courses.push_back(course);
-        delete course;
-    }
-    void removeCourse(std::string courseCode)
-    {
-        for (auto it = courses.begin(); it != courses.end(); ++it)
-        {
-            if ((*it)->getCourseCode() == courseCode)
-            {
-                delete (*it);
-                courses.erase(it);
-                break;
-            }
-        }
-    }
-    void saveCourse(std::string courseName, std::string courseCode, std::string courseSemester)
-    {
-        ofstream outFile("course.txt");
-        if (!outFile)
-        {
-            cerr << "Error: Unable to open file: " << "course.txt" << endl;
-            return;
-        }
-        for (const auto& cls : courses)
-        {
-            outFile << cls->getCourseName() << "," << cls->getCourseCode() << "," << cls->getCourseSemester() << endl;
-        }
-        cout << "Course saved successfully!" << endl;
-
-        outFile.close();
-    }
-    void loadCourseFile()
-    {
-        string courseName, courseCode, courseSemester;
-        ifstream inFile("course.txt", std::ios::in);
-        if (!inFile)
-        {
-            cerr << "Error: Unable to open file: " << "course.txt" << endl;
-            return;
-        }
-        string line;
-        while (getline(inFile, line))
-        {
-            if (line != " " || line != "") {
-                std::stringstream ss(line);
-
-                getline(ss, courseName, ',');
-                getline(ss, courseCode, ',');
-                getline(ss, courseSemester, ',');
-
-                Course* c = new Course(courseName, courseCode, courseSemester);
-                courses.push_back(c);
-            }
-        }
-        cout << "Course loaded successfully!" << endl;
-        inFile.close();
-    }
-};
-
-class Room
-{
-private:
-    std::string roomNumber;
-    std::string slot;
-    std::string day;
-    std::string semester;
-    std::string courseCode;
-public:
-    Room() = default;
-    Room(std::string roomNumber, std::string slot, std::string day, std::string semester, std::string courseCode) : roomNumber(roomNumber), slot(slot), day(day), semester(semester), courseCode(courseCode) {}
-    std::string getRoomNumber() const
-    {
-        return this->roomNumber;
-    }
-    std::string getSlot() const
-    {
-        return this->slot;
-    }
-    std::string getDay() const
-    {
-        return this->day;
-    }
-    void setDay(std::string day)
-    {
-        this->day = day;
-    }
-    void setRoomNumber(std::string roomNumber)
-    {
-        this->roomNumber = roomNumber;
-    }
-    void setSlot(std::string slot)
-    {
-        this->slot = stoi(slot);
-    }
-    std::string getSemester() const
-    {
-        return this->semester;
-    }
-    void setSemester(std::string semester)
-    {
-        this->semester = semester;
-    }
-    std::string getCourseId() const
-    {
-        return this->courseCode;
-    }
-    void setCourseId(std::string courseCode)
-    {
-        this->courseCode = courseCode;
-    }
 };
 
 class Timetable
 {
-    
 
 private:
     Admin* admin;
-public:
     vector<Room*> rooms;
+    Course* course;
+public:
     void setadminptr(Admin* a) {
         admin = a;
     }
 
-    void addClass(string courseCode, string roomNumber, string day, string slot, string semester)
+    void addClass(string courseId, string roomNumber, string day, int slot, string semester)
     {
         for (const auto& te : admin->teachers)
         {
-            if (te->getCourseCode() == courseCode)
+            if (te->getCourseId() == courseId)
             {
-                rooms.push_back(new Room(roomNumber, slot, day, semester, courseCode));
+                rooms.push_back(new Room(roomNumber, slot, day, semester, courseId));
             }
         }
-        //rooms.push_back(new Room(roomNumber, slot, day, semester, courseCode));
+        //rooms.push_back(new Room(roomNumber, slot, day, semester, courseId));
     }
     void removeClass(string slot, string day, string roomNumber)
     {
         for (auto it = rooms.rbegin(); it != rooms.rend(); ++it)
         {
-            if ((*it)->getSlot() == slot && (*it)->getDay() == day && (*it)->getRoomNumber() == roomNumber)
+            if ((*it)->getSlot() == stoi(slot) && (*it)->getDay() == day && (*it)->getRoomNumber() == roomNumber)
             {
                 rooms.erase(std::next(it).base());
             }
         }
-    }
+    }   
     void saveTimetable()
     {
         ofstream file("timetable.txt");
@@ -535,8 +466,8 @@ public:
     }
     void loadTimetable()
     {
-        ifstream file("timetable.txt", std::ios::in);
-        string roomNumber, slot, day, semester, courseCode, line;
+        ifstream file("timetable", std::ios::in);
+        string roomNumber, slot, day, semester, courseId, line;
         while (getline(file, line))
         {
             if (line != " " || line != "") {
@@ -546,8 +477,8 @@ public:
                 getline(ss, slot, ',');
                 getline(ss, day, ',');
                 getline(ss, semester, ',');
-                getline(ss, courseCode);
-                rooms.push_back(new Room(roomNumber, slot, day, semester, courseCode));
+                getline(ss, courseId);
+                rooms.push_back(new Room(roomNumber, stoi(slot), day, semester, courseId));
             }
         }
         file.close();
@@ -561,15 +492,9 @@ public:
             {
                 for (const auto& r : rooms)
                 {
-                    if (r->getCourseId() == t->getCourseCode())
+                    if (r->getCourseId() == t->getCourseId())
                     {
-                        for(const auto& c : admin->courses)
-                        {
-                            if (c->getCourseCode() == t->getCourseCode())
-                            {
-                                cout << "Room: " << r->getRoomNumber() << " " << "Slot: " << r->getSlot() << " " << "Day: " << r->getDay() << " " << "Semester: " << r->getSemester() << " " << "Course: " << c->getCourseName() << endl;
-                            }
-                        }
+                        cout << r->getRoomNumber() << " " << r->getSlot() << " " << r->getDay() << " " << r->getSemester() << " " << course->courseDetails(r->getCourseId()) << endl;
                     }
                 }
             }
@@ -581,13 +506,7 @@ public:
         {
             if (r->getRoomNumber() == room)
             {
-                cout << "Room:" << r->getRoomNumber() << " " << "Slot: " << r->getSlot() << " " << "Day: " << r->getDay() << " " << "Semester: " <<  r->getSemester() << " ";
-                for (const auto& t : admin->teachers) {
-                    if (t->getCourseCode() == r->getCourseId()) {
-                        cout <<"Course: " << t->course->courseDetails(r->getCourseId());
-                    }
-                }
-                cout << endl;
+                cout << r->getRoomNumber() << " " << r->getSlot() << " " << r->getDay() << " " << r->getSemester() << " " << course->courseDetails(r->getCourseId()) << endl;
             }
         }
     }
@@ -595,13 +514,13 @@ public:
     {
         for (const auto& r : rooms)
         {
-            if (r->getDay() == day && r->getSlot() == time && r->getRoomNumber() == room)
+            if (r->getDay() == day && r->checkRoomSlot(r->getSlot()) == time && r->getRoomNumber() == room)
             {
                 for (const auto& t : admin->teachers)
                 {
                     if (t->getCourseId() == r->getCourseId())
                     {
-                        cout << "Name: " << t->getName() << endl;
+                        cout << t->getName() << endl;
                     }
                 }
             }
@@ -613,23 +532,17 @@ public:
         {
             if (r->getSemester() == semester)
             {
-                cout << "Room: " << r->getRoomNumber() << " " << "Slot: " << r->getSlot() << " " << "Day: " <<  r->getDay() << " " << "Semester: " <<  r->getSemester() << " ";
-                for (const auto& t : admin->teachers) {
-                    if (t->getCourseId() == r->getCourseId()) {
-                        cout << "Course: " << t->course->courseDetails(r->getCourseId());
-                    }
-                }
-                cout << endl;
+                cout << r->getRoomNumber() << " " << r->getSlot() << " " << r->getDay() << " " << r->getSemester() << " " << course->courseDetails(r->getCourseId()) << endl;
             }
         }
     }
-    void printDayTimetable(const std::string& day)
+    void printDayTimetable(const std::string& day, const std::string roomNumber)
     {
         for (const auto& r : rooms)
         {
-            if (r->getDay() == day)
+            if (r->getDay() == day && r->getRoomNumber() == roomNumber)
             {
-               cout << "Room: " << r->getRoomNumber() << " " << "Slot: " << r->getSlot() << " " << "Day: " << r->getDay() << " " << "Semester: " << r->getSemester() << " " << "Course: " << r->getCourseId() << endl;
+                cout << r->getRoomNumber() << " " << r->getSlot() << " " << r->getDay() << " " << r->getSemester() << " " << r->getCourseId() << endl;
             }
         }
     }
@@ -637,13 +550,13 @@ public:
     {
         for (const auto& r : rooms)
         {
-            if (r->getSlot() == slot1 && r->getRoomNumber() == roomNumber1 && r->getDay() == day1)
+            if (r->getSlot() == stoi(slot1) && r->getRoomNumber() == roomNumber1 && r->getDay() == day1)
             {
                 r->setSlot(slot2);
                 r->setRoomNumber(roomNumber2);
                 r->setDay(day2);
             }
-            else if (r->getSlot() == slot2 && r->getRoomNumber() == roomNumber2 && r->getDay() == day2)
+            else if (r->getSlot() == stoi(slot2) && r->getRoomNumber() == roomNumber2 && r->getDay() == day2)
             {
                 r->setSlot(slot1);
                 r->setRoomNumber(roomNumber1);
@@ -652,3 +565,42 @@ public:
         }
     }
 };
+
+int main()
+{
+    /*
+    Student student;
+    int i=0;
+    student.loadStudentFile();
+    while(i == 0)
+    {
+        student.registerStudent();
+        cin >> i;
+    }
+    student.saveStudentFile();*/
+    Admin admin;
+    Timetable timetable;
+    timetable.setadminptr(&admin);
+    string a;
+    admin.loadTeacherFile();
+    admin.loadStudentFile();
+    admin.loadAdminFile();
+    timetable.loadTimetable();
+    timetable.addClass("1234", "4-17", "Monday", 1, "2B");
+    admin.registerStudent("Ahmed", "1B");
+    cout << "Enter student ID to check : ";
+    cin >> a;
+    bool chk = admin.checkStudent(a);
+    if (chk)
+    {
+        cout << "\ntrue" << endl;
+    }
+    else
+        cout << "\nfales" << endl;
+    /*string name = "Dr.Tamim", courseName = "OOP", courseId = "1234";
+    admin.registerTeacher(name, courseName, courseId);*/
+    admin.saveStudentFile();
+    admin.saveTeacherFile();
+    admin.saveAdminFile();
+    timetable.saveTimetable();
+}
