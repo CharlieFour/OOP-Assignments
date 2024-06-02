@@ -1,4 +1,0 @@
-8638,Dr.Tamim,OOP,1234
-8632,Dr.Raja Suleman,CPP,8787
-8645,Shareef,LA,4234
-8634,Dr.Awais,ISE,2352

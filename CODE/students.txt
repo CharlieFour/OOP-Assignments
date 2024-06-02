@@ -1,2 +1,0 @@
-ID: 8920, Name: Abdul Rafay, Semester: 2B
-ID: 7018, Name: Erha Riaz, Semester: 2B

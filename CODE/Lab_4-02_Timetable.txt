@@ -1,5 +1,0 @@
-Room: 4-02
-Day: Tuesday, Course: CC Lab, Teacher: Engr.Aamir, Semester: 6A, Time: 11:30 - 14:25
-Day: Thursday, Course: SDA Lab, Teacher: Engr.Aamir, Semester: 4A, Time: 08:30 - 11:25
-Day: Thursday, Course: WE Lab, Teacher: Engr.Aamir, Semester: 6A, Time: 11:30 - 14:25
-Day: Friday, Course: OS Lab, Teacher: Engr.Aamir, Semester: 4A, Time: 08:30 - 11:25
